@@ -223,42 +223,108 @@
 
     <main>
         <div class="search-bar">
-            <input type="text" placeholder="Search another player...">
-            <button>Search</button>
-        </div>
+    <input type="text" id="searchInput" placeholder="Search another player...">
+    <button id="searchBtn">Search</button>
+</div>
 
         <div class="profile-card">
-            <div class="profile-header">
-                <div class="avatar"></div>
-                <div class="player-info">
-                    <h2>PlayerName</h2>
-                    <div>
-                        <span class="rank-badge">#1,234</span>
-                        <span class="country-rank">US #42</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div class="stat-label">Performance</div>
-                    <div class="stat-value">8,452 pp</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Hit Accuracy</div>
-                    <div class="stat-value">98.45%</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Play Count</div>
-                    <div class="stat-value">45,210</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Max Combo</div>
-                    <div class="stat-value">2,140x</div>
-                </div>
+    <div class="profile-header">
+        <div class="avatar" id="playerAvatar"></div>
+        <div class="player-info">
+            <h2 id="playerName">PlayerName</h2>
+            <div>
+                <span class="rank-badge" id="playerRank">#0</span>
+                <span class="country-rank" id="playerCountry">US #0</span>
             </div>
         </div>
-    </main>
+    </div>
 
+    <div class="stats-grid">
+        <div class="stat-box">
+            <div class="stat-label">Performance</div>
+            <div class="stat-value" id="playerPP">0 pp</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-label">Hit Accuracy</div>
+            <div class="stat-value" id="playerAcc">0.00%</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-label">Play Count</div>
+            <div class="stat-value" id="playerPlayCount">0</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-label">Max Combo</div>
+            <div class="stat-value" id="playerCombo">0x</div>
+        </div>
+    </div>
+</div>
+    </main>
+<script>
+    // 1. Put your actual Cloudflare Worker URL here
+    const WORKER_URL = "https://osu-tracker-api.eliamelliger.workers.dev";
+
+    // 2. Grab the elements from the page
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+
+    // 3. The function that gets the data
+    async function fetchPlayerData(username) {
+        try {
+            // Change button text so the user knows it's working
+            searchBtn.innerText = "Loading...";
+
+            // Ask your Worker for the data
+            const response = await fetch(`${WORKER_URL}?user=${username}`);
+            const data = await response.json();
+
+            if (data.error) {
+                alert("Player not found!");
+                searchBtn.innerText = "Search";
+                return;
+            }
+
+            // 4. Inject the data into your HTML!
+            document.getElementById('playerName').innerText = data.username;
+            document.getElementById('playerAvatar').style.backgroundImage = `url('${data.avatar_url}')`;
+            
+            // Format numbers nicely with commas (e.g., 10000 -> 10,000)
+            document.getElementById('playerRank').innerText = `#${data.statistics.global_rank?.toLocaleString() || 'N/A'}`;
+            document.getElementById('playerCountry').innerText = `${data.country_code} #${data.statistics.country_rank?.toLocaleString() || 'N/A'}`;
+            
+            document.getElementById('playerPP').innerText = `${Math.round(data.statistics.pp).toLocaleString()} pp`;
+            document.getElementById('playerAcc').innerText = `${data.statistics.hit_accuracy.toFixed(2)}%`;
+            document.getElementById('playerPlayCount').innerText = data.statistics.play_count.toLocaleString();
+            document.getElementById('playerCombo').innerText = `${data.statistics.maximum_combo.toLocaleString()}x`;
+
+            // Reset button text
+            searchBtn.innerText = "Search";
+
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            alert("Something went wrong!");
+            searchBtn.innerText = "Search";
+        }
+    }
+
+    // 5. Make the button run the function
+    searchBtn.addEventListener('click', () => {
+        const username = searchInput.value.trim();
+        if (username) {
+            fetchPlayerData(username);
+        }
+    });
+
+    // 6. Make hitting "Enter" on the keyboard work too
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            searchBtn.click();
+        }
+    });
+
+    // Optional: Load a default player when the page first opens
+    window.onload = () => {
+        fetchPlayerData('mrekk'); // Loads the current #1 player automatically
+    };
+</script>
 </body>
 </html>
