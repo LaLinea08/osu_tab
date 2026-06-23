@@ -47,6 +47,41 @@
     </main></main>
 
     <script>
+        // --- UI Mode Toggle Logic ---
+        const btnSingle = document.getElementById('btnSingleMode');
+        const btnCompare = document.getElementById('btnCompareMode');
+        
+        const singleSearchBox = document.getElementById('singleSearchBox');
+        const dualSearchBox = document.getElementById('dualSearchBox');
+        
+        const singleView = document.getElementById('singleProfileView');
+        const compareView = document.getElementById('comparisonView');
+
+        // When "Single Player" is clicked
+        btnSingle.addEventListener('click', () => {
+            // Light up the correct button
+            btnSingle.classList.add('active');
+            btnCompare.classList.remove('active');
+            
+            // Show Single UI, Hide Compare UI
+            singleSearchBox.classList.remove('hidden');
+            singleView.classList.remove('hidden');
+            dualSearchBox.classList.add('hidden');
+            compareView.classList.add('hidden');
+        });
+
+        // When "Compare" is clicked
+        btnCompare.addEventListener('click', () => {
+            // Light up the correct button
+            btnCompare.classList.add('active');
+            btnSingle.classList.remove('active');
+            
+            // Show Compare UI, Hide Single UI
+            dualSearchBox.classList.remove('hidden');
+            compareView.classList.remove('hidden');
+            singleSearchBox.classList.add('hidden');
+            singleView.classList.add('hidden');
+        });
         // *** PUT YOUR WORKER URL HERE ***
         const WORKER_URL = "https://osu-tracker-api.eliamelliger.workers.dev";
 
