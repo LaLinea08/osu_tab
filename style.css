@@ -197,6 +197,46 @@ nav a.milky-tab:hover {
 .stat-row { display: flex; justify-content: space-between; padding: 10px 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); font-size: 1.1rem; border-radius: 6px; transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; }
 .stat-row:last-child { border-bottom: none; }
 .stat-row:hover { transform: scale(1.03); background-color: rgba(255, 255, 255, 0.05); }
+/* --- THE NEW TOOLTIP SYSTEM --- */
+.stat-row {
+    position: relative; /* Required so the tooltip knows where to attach */
+}
+
+/* The hidden tooltip box */
+.stat-row::after {
+    content: attr(data-tooltip); /* Pulls the text from JavaScript */
+    position: absolute;
+    right: 110%; /* Pushes it to the left of the stat row */
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    background: rgba(42, 34, 48, 0.9); /* Dark solid glass */
+    border: 1px solid var(--osu-pink);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    z-index: 10;
+    pointer-events: none; /* Stops it from flickering if the mouse hits it */
+}
+
+/* Make it appear and slide in on hover! */
+.stat-row:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0); /* Slides it into place */
+}
+
+/* If there is no tooltip data, hide the box completely */
+.stat-row:not([data-tooltip])::after,
+.stat-row[data-tooltip=""]::after {
+    display: none;
+}
 
 .stat-name { font-weight: 600; color: var(--text-muted); }
 .stat-val { font-weight: 800; color: var(--text-main); }
