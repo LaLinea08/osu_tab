@@ -24,21 +24,34 @@
             <div class="wireframe-header" id="headerBg">
                 <div class="header-overlay"></div>
                 
+                <!-- Left Side: PFP, Flag, Name, Playstyle -->
                 <div class="pfp-col">
-                    <div class="avatar-wrapper">
-                        <div class="avatar" id="playerAvatar"></div>
-                        <div class="online-tag hidden" id="onlineTag"><span class="green-dot"></span>Online</div>
-                    </div>
-                    <h2 class="player-name" id="playerName">PlayerName</h2>
-                </div>
-                
-                <div class="header-details">
-                    <div class="flag-and-badges">
-                        <div class="supporter-tag hidden" id="supporterTag">Supporter</div>
+                    
+                    <!-- Top Row: Avatar and Flag -->
+                    <div class="avatar-row">
+                        <div class="avatar-wrapper">
+                            <!-- Supporter tag moved inside the wrapper so we can pin it to the corner -->
+                            <div class="supporter-tag hidden" id="supporterTag">Supporter</div>
+                            
+                            <div class="avatar" id="playerAvatar"></div>
+                            
+                            <div class="online-tag hidden" id="onlineTag"><span class="green-dot"></span>Online</div>
+                        </div>
+                        
+                        <!-- Flag moved directly next to the avatar wrapper -->
                         <div class="flag-box" id="playerFlag"></div>
+                    </div>
+                    
+                    <!-- Bottom Row: Username and Playstyle -->
+                    <div class="name-row">
+                        <h2 class="player-name" id="playerName">PlayerName</h2>
                         <div class="playstyle-text" id="playstyleText"></div>
                     </div>
                     
+                </div>
+                
+                <!-- Right Side: Just the XP Bar taking up the rest of the space -->
+                <div class="header-details flex-grow">
                     <div class="xp-container">
                         <div class="xp-text" id="xpText">Level 0 (0%)</div>
                         <div class="xp-bar-bg">
