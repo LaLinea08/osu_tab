@@ -124,11 +124,48 @@
                     return;
                 }
 
-                // --- 1. Top Section (Avatar, Name, Flag, XP) ---
+               // --- 1. Top Banner Section ---
+                
+                // Set the Background Cover Image
+                const headerBg = document.getElementById('headerBg');
+                if (data.cover_url) {
+                    headerBg.style.backgroundImage = `url('${data.cover_url}')`;
+                } else {
+                    headerBg.style.backgroundImage = 'none';
+                }
+
+                // Avatar and Name
                 document.getElementById('playerName').innerText = data.username;
                 document.getElementById('playerAvatar').style.backgroundImage = `url('${data.avatar_url}')`;
+                
+                // Online Status
+                const onlineTag = document.getElementById('onlineTag');
+                if (data.is_online) {
+                    onlineTag.classList.remove('hidden');
+                } else {
+                    onlineTag.classList.add('hidden');
+                }
+
+                // Supporter Status
+                const supporterTag = document.getElementById('supporterTag');
+                if (data.is_supporter) {
+                    supporterTag.classList.remove('hidden');
+                } else {
+                    supporterTag.classList.add('hidden');
+                }
+
+                // Flag
                 document.getElementById('playerFlag').style.backgroundImage = `url('https://flagcdn.com/w80/${data.country_code.toLowerCase()}.png')`;
                 
+                // Playstyle (e.g., "Keyboard, Tablet")
+                const playstyleText = document.getElementById('playstyleText');
+                if (data.playstyle && data.playstyle.length > 0) {
+                    playstyleText.innerText = data.playstyle.join(', ');
+                } else {
+                    playstyleText.innerText = '';
+                }
+
+                // XP Bar
                 const levelProgress = data.statistics.level.progress;
                 document.getElementById('xpFill').style.width = `${levelProgress}%`;
                 document.getElementById('xpText').innerText = `Level ${data.statistics.level.current} (${levelProgress}%)`;
