@@ -21,14 +21,24 @@
 
         <div class="profile-card">
             
-            <div class="wireframe-header">
+            <div class="wireframe-header" id="headerBg">
+                <div class="header-overlay"></div>
+                
                 <div class="pfp-col">
-                    <div class="avatar" id="playerAvatar"></div>
+                    <div class="avatar-wrapper">
+                        <div class="avatar" id="playerAvatar"></div>
+                        <div class="online-tag hidden" id="onlineTag"><span class="green-dot"></span>Online</div>
+                    </div>
                     <h2 class="player-name" id="playerName">PlayerName</h2>
                 </div>
                 
                 <div class="header-details">
-                    <div class="flag-box" id="playerFlag"></div>
+                    <div class="flag-and-badges">
+                        <div class="supporter-tag hidden" id="supporterTag">Supporter</div>
+                        <div class="flag-box" id="playerFlag"></div>
+                        <div class="playstyle-text" id="playstyleText"></div>
+                    </div>
+                    
                     <div class="xp-container">
                         <div class="xp-text" id="xpText">Level 0 (0%)</div>
                         <div class="xp-bar-bg">
