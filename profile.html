@@ -284,9 +284,30 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .nav-title span {
+        /* Makes the 'tab' part neon pink */
+        .brand-pink {
             color: var(--osu-pink, #ff66aa);
             text-shadow: 0 0 15px rgba(255, 102, 170, 0.6);
+        }
+
+        /* Makes the page-specific title (like 'Stats') an icy blue */
+        .page-suffix {
+            color: #73d0ff; 
+            text-shadow: 0 0 15px rgba(115, 208, 255, 0.6);
+            margin-left: 4px; /* Adds a tiny bit of breathing room */
+            font-weight: 600; /* Slightly thinner text to contrast with the bold logo */
+        }
+
+        .ambient-glow {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw; 
+            height: 300px;
+            background: radial-gradient(ellipse at top, rgba(255, 102, 170, 0.15) 0%, transparent 70%);
+            z-index: -1; 
+            pointer-events: none; 
         }
 
         .ambient-glow {
@@ -305,16 +326,15 @@
 <body>
     <header>
         <div class="ambient-glow"></div>
-        
         <div class="nav-container">
             <div class="logo-area">
                 <span class="osu-logo-circle"></span>
-                <h1 class="nav-title">osu!tab<span>Stats</span></h1>
+                <h1 class="nav-title">osu!<span class="brand-pink">tab</span><span class="page-suffix">Stats</span></h1>
             </div>
+            
             <nav>
                 <a href="index.html">home</a>
-                <a href="profile.html">search</a>
-            </nav>
+                </nav>
         </div>
     </header>
 
