@@ -175,13 +175,84 @@ nav a.milky-tab:hover {
     padding: 40px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-.wireframe-header { display: flex; align-items: flex-start; gap: 25px; margin-bottom: 30px; }
-.pfp-col { display: flex; flex-direction: column; align-items: center; width: 140px; }
-.avatar {
-    width: 140px; height: 140px; border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.1); background-position: center; background-size: cover;
-    border: 2px solid var(--osu-pink); box-shadow: 0 0 15px rgba(255, 102, 170, 0.3);
+/* --- TOP BANNER SECTION --- */
+.wireframe-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    padding: 30px; /* Gives room inside the background image */
+    border-radius: 12px;
+    position: relative; /* Needed for the background overlay */
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--glass-border);
+    overflow: hidden; 
 }
+
+/* Dark gradient so text is readable over bright anime backgrounds */
+.header-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to right, rgba(23, 17, 28, 0.95) 0%, rgba(23, 17, 28, 0.6) 50%, rgba(23, 17, 28, 0.85) 100%);
+    z-index: 0;
+}
+
+/* Keep the content above the dark background overlay */
+.pfp-col, .header-details { position: relative; z-index: 1; }
+
+.avatar-wrapper { position: relative; }
+
+/* The Online Green Pill */
+.online-tag {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 15, 15, 0.9);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #4ade80; /* Neon Green */
+    border: 1px solid #4ade80;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
+}
+.green-dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 8px #4ade80; }
+
+/* The Column for Supporter -> Flag -> Playstyle */
+.flag-and-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.supporter-tag {
+    background: rgba(255, 102, 170, 0.15);
+    border: 1px solid var(--osu-pink);
+    color: var(--osu-pink);
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-shadow: 0 0 5px rgba(255, 102, 170, 0.5);
+    white-space: nowrap;
+}
+
+.playstyle-text {
+    font-size: 0.8rem;
+    color: #73d0ff; /* Matches your icy blue secondary color */
+    font-weight: 700;
+    text-transform: capitalize;
+    text-shadow: 0 0 8px rgba(115, 208, 255, 0.4);
+}
+
+/* Helper class to easily hide things using JavaScript */
+.hidden { display: none !important; }
 .player-name { font-size: 1.4rem; font-weight: 800; margin: 10px 0 0 0; text-align: center; word-break: break-all; }
 
 .header-details { flex: 1; display: flex; align-items: flex-end; gap: 20px; height: 140px; padding-bottom: 5px; box-sizing: border-box; }
