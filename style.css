@@ -164,8 +164,14 @@ nav a.milky-tab:hover {
 }
 .search-bar input:focus { border-color: var(--osu-pink); }
 .search-bar button {
-    background: var(--osu-pink); color: white; border: none; padding: 0 25px;
-    border-radius: 50px; font-weight: 700; cursor: pointer;
+    background: var(--osu-pink); 
+    color: white; 
+    border: none; 
+    padding: 12px 25px; /* Added height so it matches the input fields */
+    border-radius: 50px; 
+    font-weight: 700; 
+    cursor: pointer;
+    white-space: nowrap; /* Stops the text from wrapping */
 }
 
 .profile-card {
