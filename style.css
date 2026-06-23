@@ -281,8 +281,8 @@ nav a.milky-tab:hover {
 }
 
 .flag-box { 
-    width: 40px; 
-    height: 30px; 
+    width: 60px; /* Increased from 40px */
+    height: 40px; /* Increased from 30px */
     background-color: rgba(0,0,0,0.3); 
     background-position: center; 
     background-size: cover; 
