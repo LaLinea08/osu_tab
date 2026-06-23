@@ -203,13 +203,18 @@ nav a.milky-tab:hover {
 }
 
 /* The hidden tooltip box */
+/* The hidden tooltip box */
 .stat-row::after {
-    content: attr(data-tooltip); /* Pulls the text from JavaScript */
+    content: attr(data-tooltip);
     position: absolute;
-    right: 110%; /* Pushes it to the left of the stat row */
+    
+    /* This drops it exactly where your red box is! */
+    /* You can increase or decrease this number to nudge it left or right */
+    left: 160px; 
+    
     top: 50%;
-    transform: translateY(-50%) translateX(10px);
-    background: rgba(42, 34, 48, 0.9); /* Dark solid glass */
+    transform: translateY(-50%) translateX(-10px);
+    background: rgba(42, 34, 48, 0.9);
     border: 1px solid var(--osu-pink);
     color: white;
     padding: 6px 12px;
@@ -222,14 +227,14 @@ nav a.milky-tab:hover {
     transition: all 0.2s ease-in-out;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     z-index: 10;
-    pointer-events: none; /* Stops it from flickering if the mouse hits it */
+    pointer-events: none;
 }
 
 /* Make it appear and slide in on hover! */
 .stat-row:hover::after {
     opacity: 1;
     visibility: visible;
-    transform: translateY(-50%) translateX(0); /* Slides it into place */
+    transform: translateY(-50%) translateX(0); /* Slides neatly into place */
 }
 
 /* If there is no tooltip data, hide the box completely */
