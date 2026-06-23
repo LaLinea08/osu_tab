@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>osu! Style Page</title>
+    <title>osu! Glass Edition</title>
+    <!-- Importing Exo 2 font family -->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --osu-pink: #ff66aa;
             --osu-pink-hover: #ff88bb;
-            --bg-darker: #1c1a21;
-            --bg-dark: #2a2230;
-            --bg-card: #382e43;
-            --text-main: #fff;
-            --text-muted: #bdaec6;
+            --text-main: #ffffff;
+            --text-muted: #e2d9e6;
+            
+            /* Glassmorphism Variables */
+            --glass-bg: rgba(42, 34, 48, 0.45);
+            --glass-bg-hover: rgba(56, 46, 67, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(16px);
         }
 
         body {
             font-family: 'Exo 2', Arial, sans-serif;
-            background-color: var(--bg-darker);
+            /* A deep plum gradient background to make the glass effect pop */
+            background: radial-gradient(circle at 80% 20%, #382445 0%, #17111c 100%);
             color: var(--text-main);
             margin: 0;
             padding: 0;
@@ -27,13 +32,16 @@
             min-height: 100vh;
         }
 
-        /* Top Navbar */
+        /* Glass Top Navbar */
         header {
-            background-color: var(--bg-dark);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            background-color: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur); /* Safari Support */
+            border-bottom: 1px solid var(--glass-border);
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
         .nav-container {
@@ -43,7 +51,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
-            height: 60px;
+            height: 65px;
         }
 
         .logo-area {
@@ -52,19 +60,19 @@
             gap: 12px;
         }
 
-        /* Quick representation of the osu! pink circle */
+        /* Glowing osu! logo circle */
         .osu-logo-circle {
             width: 35px;
             height: 35px;
             background-color: var(--osu-pink);
             border-radius: 50%;
             display: inline-block;
-            box-shadow: 0 0 10px var(--osu-pink);
-            transition: transform 0.2s ease;
+            box-shadow: 0 0 15px var(--osu-pink);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .osu-logo-circle:hover {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(10deg);
         }
 
         h1 {
@@ -72,6 +80,7 @@
             font-weight: 800;
             margin: 0;
             letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         nav {
@@ -87,23 +96,24 @@
             display: flex;
             align-items: center;
             position: relative;
-            transition: color 0.2s ease;
+            transition: color 0.2s ease, background-color 0.2s ease;
         }
 
         nav a:hover {
             color: var(--text-main);
-            background-color: rgba(255, 255, 255, 0.03);
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
-        /* The signature pink bottom border on active/hovered items */
+        /* Neon pink indicator line */
         nav a:hover::after, nav a.active::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -1px; /* aligns perfectly with the glass border */
             left: 0;
             width: 100%;
-            height: 4px;
+            height: 3px;
             background-color: var(--osu-pink);
+            box-shadow: 0 -2px 10px var(--osu-pink);
         }
 
         /* Main Content Container */
@@ -111,47 +121,56 @@
             flex: 1;
             max-width: 1000px;
             width: 100%;
-            margin: 40px auto;
+            margin: 60px auto;
             padding: 0 20px;
             box-sizing: border-box;
         }
 
+        /* Frosty Glass Card */
         .welcome-card {
-            background-color: var(--bg-card);
-            border-radius: 10px;
-            padding: 30px;
-            border-left: 5px solid var(--osu-pink);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-left: 6px solid var(--osu-pink); /* Signature pink accent track */
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         .welcome-card h2 {
             margin-top: 0;
             font-weight: 800;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .welcome-card p {
             color: var(--text-muted);
-            line-height: 1.6;
-            font-size: 1.1rem;
+            line-height: 1.7;
+            font-size: 1.15rem;
         }
 
+        /* Glowing Frosted Button */
         .btn-primary {
             display: inline-block;
-            background-color: var(--osu-pink);
+            background: rgba(255, 102, 170, 0.2);
             color: white;
             text-decoration: none;
-            padding: 10px 24px;
+            padding: 12px 30px;
             border-radius: 50px;
             font-weight: 600;
-            margin-top: 15px;
-            box-shadow: 0 4px 10px rgba(255, 102, 170, 0.3);
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 102, 170, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 102, 170, 0.15);
+            backdrop-filter: var(--glass-blur);
+            transition: all 0.2s ease;
         }
 
         .btn-primary:hover {
-            background-color: var(--osu-pink-hover);
-            transform: translateY(-1px);
+            background: var(--osu-pink);
+            box-shadow: 0 0 20px var(--osu-pink);
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -176,7 +195,7 @@
     <main>
         <div class="welcome-card">
             <h2>Welcome to the rhythm!</h2>
-            <p>This layout uses osu!'s actual styling language: rich plum backgrounds, vibrant pink accents, rounded UI cards, and the signature <strong>Exo 2</strong> typography.</p>
+            <p>This layout levels up the interface with modern glassmorphism. By utilizing translucent backgrounds, real-time backdrop filtering, and faint outer border highlights, the UI feels lightweight and perfectly layered over the ambient backdrop.</p>
             <a href="#" class="btn-primary">Download osu!</a>
         </div>
     </main>
