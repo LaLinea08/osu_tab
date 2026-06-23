@@ -14,7 +14,7 @@ class TopNavbar extends HTMLElement {
                     </div>
                     
                     <nav>
-                        <a href="index.html" class="nav-home-btn">home</a>
+                        <a href="index.html" class="milky-tab">home</a>
                         <!-- If you ever want to add a new link to every page, you only have to do it right here! -->
                     </nav>
                 </div>
