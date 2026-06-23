@@ -256,6 +256,22 @@
             <div class="stat-label">Max Combo</div>
             <div class="stat-value" id="playerCombo">0x</div>
         </div>
+        <div class="stat-box">
+                    <div class="stat-label">Level</div>
+                    <div class="stat-value" id="playerLevel">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Play Time</div>
+                    <div class="stat-value" id="playerPlayTime">0h</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Ranked Score</div>
+                    <div class="stat-value" id="playerScore">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">SS / S Ranks</div>
+                    <div class="stat-value" id="playerRanks">0 / 0</div>
+                </div>
     </div>
 </div>
     </main>
@@ -295,6 +311,22 @@
             document.getElementById('playerAcc').innerText = `${data.statistics.hit_accuracy.toFixed(2)}%`;
             document.getElementById('playerPlayCount').innerText = data.statistics.play_count.toLocaleString();
             document.getElementById('playerCombo').innerText = `${data.statistics.maximum_combo.toLocaleString()}x`;
+
+            // --- NEW STATS ---
+            // Level
+            document.getElementById('playerLevel').innerText = data.statistics.level.current;
+            
+            // Play time is given in seconds, so we divide by 3600 to get hours
+            const hoursPlayed = Math.round(data.statistics.play_time / 3600);
+            document.getElementById('playerPlayTime').innerText = `${hoursPlayed.toLocaleString()}h`;
+            
+            // Ranked Score
+            document.getElementById('playerScore').innerText = data.statistics.ranked_score.toLocaleString();
+            
+            // Grades (combining normal SS/S with silver SS/S)
+            const totalSS = data.statistics.grade_counts.ss + data.statistics.grade_counts.ssh;
+            const totalS = data.statistics.grade_counts.s + data.statistics.grade_counts.sh;
+            document.getElementById('playerRanks').innerText = `${totalSS.toLocaleString()} / ${totalS.toLocaleString()}`;
 
             // Reset button text
             searchBtn.innerText = "Search";
