@@ -1,0 +1,199 @@
+/* =========================================
+   1. GLOBAL VARIABLES & BASE STYLES
+========================================= */
+:root {
+    --osu-pink: #ff66aa;
+    --text-main: #ffffff;
+    --text-muted: #e2d9e6;
+    
+    /* Glassmorphism Variables */
+    --glass-bg: rgba(42, 34, 48, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-blur: blur(16px);
+}
+
+body {
+    font-family: 'Exo 2', Arial, sans-serif;
+    background: radial-gradient(circle at 80% 20%, #382445 0%, #17111c 100%);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    max-width: 1000px;
+    width: 100%;
+    margin: 60px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   2. SHARED NAVBAR COMPONENT
+========================================= */
+header {
+    background-color: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 65px;
+}
+
+.logo-area { display: flex; align-items: center; gap: 12px; }
+
+.osu-logo-circle {
+    width: 30px; height: 30px;
+    background-color: var(--osu-pink);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--osu-pink);
+}
+
+nav { display: flex; height: 100%; align-items: center; }
+
+nav a { 
+    color: var(--text-muted); 
+    text-decoration: none; 
+    font-weight: 600; 
+    padding: 0 15px; 
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--text-main);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Neon pink indicator line for active/hover tabs */
+nav a:hover::after, nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; 
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--osu-pink);
+    box-shadow: 0 -2px 10px var(--osu-pink);
+}
+
+/* Navbar Title & Glow */
+.nav-title {
+    font-size: 1.6rem; font-weight: 800; color: #ffffff;
+    margin: 0; letter-spacing: 1px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.brand-pink { color: var(--osu-pink); text-shadow: 0 0 15px rgba(255, 102, 170, 0.6); }
+.page-suffix { color: #73d0ff; text-shadow: 0 0 15px rgba(115, 208, 255, 0.6); margin-left: 4px; font-weight: 600; }
+
+.ambient-glow {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 100vw; height: 300px;
+    background: radial-gradient(ellipse at top, rgba(255, 102, 170, 0.15) 0%, transparent 70%);
+    z-index: -1; pointer-events: none; 
+}
+
+/* =========================================
+   3. INDEX.HTML (HOME HUB CARDS)
+========================================= */
+.welcome-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-left: 6px solid var(--osu-pink); 
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.welcome-card h2 { margin-top: 0; font-weight: 800; font-size: 2rem; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
+.welcome-card p { color: var(--text-muted); line-height: 1.7; font-size: 1.15rem; }
+
+.btn-primary {
+    display: inline-block; background: rgba(255, 102, 170, 0.2);
+    color: white; text-decoration: none; padding: 12px 30px;
+    border-radius: 50px; font-weight: 600; margin-top: 20px;
+    border: 1px solid rgba(255, 102, 170, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 102, 170, 0.15);
+    backdrop-filter: var(--glass-blur); transition: all 0.2s ease;
+}
+.btn-primary:hover { background: var(--osu-pink); box-shadow: 0 0 20px var(--osu-pink); transform: translateY(-2px); }
+
+/* =========================================
+   4. PROFILE.HTML (STATS & SEARCH)
+========================================= */
+.search-bar { display: flex; gap: 10px; margin-bottom: 30px; }
+.search-bar input {
+    flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--glass-border);
+    padding: 12px 20px; border-radius: 50px; color: white; font-family: 'Exo 2', sans-serif;
+    font-size: 1rem; backdrop-filter: var(--glass-blur); outline: none;
+}
+.search-bar input:focus { border-color: var(--osu-pink); }
+.search-bar button {
+    background: var(--osu-pink); color: white; border: none; padding: 0 25px;
+    border-radius: 50px; font-weight: 700; cursor: pointer;
+}
+
+.profile-card {
+    background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border); border-radius: 16px;
+    padding: 40px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.wireframe-header { display: flex; align-items: flex-start; gap: 25px; margin-bottom: 30px; }
+.pfp-col { display: flex; flex-direction: column; align-items: center; width: 140px; }
+.avatar {
+    width: 140px; height: 140px; border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.1); background-position: center; background-size: cover;
+    border: 2px solid var(--osu-pink); box-shadow: 0 0 15px rgba(255, 102, 170, 0.3);
+}
+.player-name { font-size: 1.4rem; font-weight: 800; margin: 10px 0 0 0; text-align: center; word-break: break-all; }
+
+.header-details { flex: 1; display: flex; align-items: flex-end; gap: 20px; height: 140px; padding-bottom: 5px; box-sizing: border-box; }
+.flag-box { width: 60px; height: 40px; background-color: rgba(0,0,0,0.3); background-position: center; background-size: cover; border: 1px solid var(--glass-border); border-radius: 6px; }
+
+.xp-container { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.xp-text { text-align: center; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); letter-spacing: 1px; }
+.xp-bar-bg { width: 100%; height: 12px; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--glass-border); border-radius: 10px; overflow: hidden; }
+.xp-bar-fill { height: 100%; width: 0%; background: var(--osu-pink); box-shadow: 0 0 10px var(--osu-pink); transition: width 0.8s ease-out; }
+
+.stats-list-box { background: rgba(0, 0, 0, 0.2); border: 1px solid var(--glass-border); border-radius: 12px; padding: 25px; }
+.stats-title { margin-top: 0; margin-bottom: 20px; font-size: 1.2rem; color: var(--text-muted); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; }
+.stat-row { display: flex; justify-content: space-between; padding: 10px 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); font-size: 1.1rem; border-radius: 6px; transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; }
+.stat-row:last-child { border-bottom: none; }
+.stat-row:hover { transform: scale(1.03); background-color: rgba(255, 255, 255, 0.05); }
+
+.stat-name { font-weight: 600; color: var(--text-muted); }
+.stat-val { font-weight: 800; color: var(--text-main); }
+.stat-divider { height: 20px; }
+
+/* Colors & Animations */
+.color-rank { color: #73d0ff; text-shadow: 0 0 10px rgba(115, 208, 255, 0.4); }
+.color-pp { color: var(--osu-pink); text-shadow: 0 0 12px rgba(255, 102, 170, 0.5); }
+.color-ss { color: #e0e0e0; text-shadow: 0 0 10px rgba(224, 224, 224, 0.5); }
+.color-s { color: #ffd966; text-shadow: 0 0 10px rgba(255, 217, 102, 0.5); }
+.color-a { color: #a2e043; text-shadow: 0 0 10px rgba(162, 224, 67, 0.5); }
+
+.shimmer-text { animation: glowShimmer 2.5s infinite alternate ease-in-out; }
+@keyframes glowShimmer {
+    0% { opacity: 0.8; text-shadow: 0 0 5px currentColor; }
+    100% { opacity: 1; text-shadow: 0 0 12px currentColor, 0 0 20px currentColor; }
+}
