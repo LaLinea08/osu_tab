@@ -13,69 +13,38 @@
     <script src="navbar.js"></script>
     <top-navbar page-name="Stats"></top-navbar>
 
-    <main>
-        <div class="search-bar">
+    <main><main>
+        <div class="mode-toggle-container">
+            <div class="mode-toggle">
+                <button id="btnSingleMode" class="toggle-btn active">Single Player</button>
+                <button id="btnCompareMode" class="toggle-btn">Compare</button>
+            </div>
+        </div>
+
+        <div class="search-bar" id="singleSearchBox">
             <input type="text" id="searchInput" placeholder="Search a player...">
             <button id="searchBtn">Search</button>
         </div>
 
-        <div class="profile-card">
-            
-            <div class="wireframe-header" id="headerBg">
-                <!-- This overlay darkens the background image so text stays readable -->
-                <div class="header-overlay"></div>
-                
-                <div class="pfp-col">
-                    <div class="avatar-wrapper">
-                        <div class="avatar" id="playerAvatar"></div>
-                        <!-- Online Status Badge -->
-                        <div class="online-tag hidden" id="onlineTag"><span class="green-dot"></span>Online</div>
-                    </div>
-                    <h2 class="player-name" id="playerName">PlayerName</h2>
-                </div>
-                
-                <div class="header-details">
-                    <!-- The stacked column for badges & flag -->
-                    <div class="flag-and-badges">
-                        <div class="supporter-tag hidden" id="supporterTag">Supporter</div>
-                        <div class="flag-box" id="playerFlag"></div>
-                        <div class="playstyle-text" id="playstyleText"></div>
-                    </div>
-                    
-                    <div class="xp-container">
-                        <div class="xp-text" id="xpText">Level 0 (0%)</div>
-                        <div class="xp-bar-bg">
-                            <div class="xp-bar-fill" id="xpFill"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="stats-list-box">
-                <h3 class="stats-title">Stats List:</h3>
-                
-                <div class="stat-row"><span class="stat-name color-rank shimmer-text">Global Rank</span><span class="stat-val" id="playerRank">--</span></div>
-                <div class="stat-row"><span class="stat-name">Country Rank</span><span class="stat-val" id="playerCountry">--</span></div>
-                <div class="stat-row"><span class="stat-name color-pp shimmer-text">Performance (PP)</span><span class="stat-val" id="playerPP">--</span></div>
-                <div class="stat-row"><span class="stat-name">Hit Accuracy</span><span class="stat-val" id="playerAcc">--</span></div>
-                
-                <div class="stat-divider"></div>
-                
-                <div class="stat-row"><span class="stat-name color-ss shimmer-text">SS Ranks</span><span class="stat-val" id="rankSS">--</span></div>
-                <div class="stat-row"><span class="stat-name color-s shimmer-text">S Ranks</span><span class="stat-val" id="rankS">--</span></div>
-                <div class="stat-row"><span class="stat-name color-a shimmer-text">A Ranks</span><span class="stat-val" id="rankA">--</span></div>
-                
-                <div class="stat-divider"></div>
-                
-                <div class="stat-row"><span class="stat-name">Max Combo</span><span class="stat-val" id="playerCombo">--</span></div>
-                <div class="stat-row"><span class="stat-name">Play Count</span><span class="stat-val" id="playerPlayCount">--</span></div>
-                <div class="stat-row"><span class="stat-name">Play Time</span><span class="stat-val" id="playerPlayTime">--</span></div>
-                <div class="stat-row"><span class="stat-name">Ranked Score</span><span class="stat-val" id="playerScore">--</span></div>
-                <div class="stat-row"><span class="stat-name">Join Date</span><span class="stat-val" id="playerJoinDate">--</span></div>
-            </div>
-
+        <div class="search-bar dual-search hidden" id="dualSearchBox">
+            <input type="text" id="searchInput1" placeholder="Player 1...">
+            <span class="vs-text">VS</span>
+            <input type="text" id="searchInput2" placeholder="Player 2...">
+            <button id="compareBtn">Compare</button>
         </div>
-    </main>
+
+        <div id="singleProfileView">
+            <div class="profile-card">
+                </div>
+        </div>
+
+        <div class="comparison-container hidden" id="comparisonView">
+            <div class="profile-card">
+                </div>
+            <div class="profile-card">
+                </div>
+        </div>
+    </main></main>
 
     <script>
         // *** PUT YOUR WORKER URL HERE ***
