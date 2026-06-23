@@ -196,6 +196,8 @@ nav a.milky-tab:hover {
     z-index: 0;
 }
 
+.pfp-col, .header-details { position: relative; z-index: 1; }
+
 .avatar-wrapper { position: relative; }
 
 .avatar {
@@ -209,25 +211,11 @@ nav a.milky-tab:hover {
     box-shadow: 0 0 15px rgba(255, 102, 170, 0.4); 
 }
 
-/* UPDATED BANNER LAYOUT */
-.pfp-col { 
-    position: relative; 
-    z-index: 1; 
+.pfp-col {
     display: flex;
     flex-direction: column;
-    gap: 12px; 
-}
-
-.avatar-row {
-    display: flex;
     align-items: center;
-    gap: 15px; 
-}
-
-.name-row {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
+    gap: 10px;
 }
 
 .player-name { 
@@ -257,15 +245,19 @@ nav a.milky-tab:hover {
 
 .green-dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 8px #4ade80; }
 
+/* The Reverted Column for Supporter -> Flag -> Playstyle */
+.flag-and-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
 .supporter-tag {
-    position: absolute;
-    top: -10px;
-    left: -15px;
-    z-index: 10;
-    background: rgba(20, 20, 20, 0.95); 
+    background: rgba(255, 102, 170, 0.15);
     border: 1px solid var(--osu-pink);
     color: var(--osu-pink);
-    padding: 3px 10px;
+    padding: 3px 12px;
     border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 800;
@@ -274,7 +266,7 @@ nav a.milky-tab:hover {
 }
 
 .playstyle-text {
-    font-size: 0.85rem; 
+    font-size: 0.8rem;
     color: #73d0ff; 
     font-weight: 700;
     text-transform: capitalize;
@@ -282,12 +274,10 @@ nav a.milky-tab:hover {
 }
 
 .header-details { 
-    position: relative; 
-    z-index: 1; 
-    flex-grow: 1; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex: 1; 
+    display: flex; 
+    align-items: center; 
+    gap: 30px; 
 }
 
 .flag-box { 
