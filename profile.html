@@ -270,6 +270,20 @@
                 text-shadow: 0 0 12px currentColor, 0 0 20px currentColor;
             }
         }
+        /* --- HOVER ZOOM EFFECT --- */
+        
+        /* 1. Tell the row to animate smoothly */
+        .stat-row {
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            padding: 4px 8px; /* Adds a little breathing room for the hover box */
+            border-radius: 6px; /* Rounds the edges of the hover highlight */
+        }
+
+        /* 2. Make it zoom and highlight on hover */
+        .stat-row:hover {
+            transform: scale(1.03); /* Zooms it in by 3% */
+            background-color: rgba(255, 255, 255, 0.05); /* Very faint white glass highlight */
+        }
     </style>
 </head>
 <body>
