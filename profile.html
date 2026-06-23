@@ -81,4 +81,399 @@
                     <div class="stat-row"><span class="stat-name shimmer-text">Max Combo</span><span class="stat-val" id="playerCombo">--</span></div>
                     <div class="stat-row"><span class="stat-name shimmer-text">Play Count</span><span class="stat-val" id="playerPlayCount">--</span></div>
                     <div class="stat-row"><span class="stat-name shimmer-text">Play Time</span><span class="stat-val" id="playerPlayTime">--</span></div>
-                    <div class="stat-row"><span class="stat
+                    <div class="stat-row"><span class="stat-name shimmer-text">Ranked Score</span><span class="stat-val" id="playerScore">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Join Date</span><span class="stat-val" id="playerJoinDate">--</span></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="comparison-container hidden" id="comparisonView">
+            
+            <div class="profile-card" id="p1Card">
+                <div class="wireframe-header" id="p1HeaderBg">
+                    <div class="header-overlay"></div>
+                    <div class="pfp-col">
+                        <div class="avatar-wrapper">
+                            <div class="avatar" id="p1Avatar"></div>
+                            <div class="online-tag hidden" id="p1OnlineTag"><span class="green-dot"></span>Online</div>
+                        </div>
+                        <h2 class="player-name" id="p1Name">Player 1</h2>
+                    </div>
+                    <div class="header-details">
+                        <div class="flag-and-badges">
+                            <div class="supporter-tag hidden" id="p1SupporterTag">Supporter</div>
+                            <div class="flag-box" id="p1Flag"></div>
+                            <div class="playstyle-text" id="p1PlaystyleText"></div>
+                        </div>
+                        <div class="xp-container">
+                            <div class="xp-text" id="p1XpText">Level 0 (0%)</div>
+                            <div class="xp-bar-bg"><div class="xp-bar-fill" id="p1XpFill"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-list-box">
+                    <h3 class="stats-title">Stats:</h3>
+                    <div class="stat-row"><span class="stat-name color-rank shimmer-text">Global Rank</span><span class="stat-val" id="p1Rank">--</span></div>
+                    <div class="stat-row"><span class="stat-name color-rank shimmer-text">Country Rank</span><span class="stat-val" id="p1Country">--</span></div>
+                    <div class="stat-row"><span class="stat-name color-pp shimmer-text">Performance (PP)</span><span class="stat-val" id="p1PP">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Hit Accuracy</span><span class="stat-val" id="p1Acc">--</span></div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Max Combo</span><span class="stat-val" id="p1Combo">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Play Count</span><span class="stat-val" id="p1PlayCount">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Play Time</span><span class="stat-val" id="p1PlayTime">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Ranked Score</span><span class="stat-val" id="p1Score">--</span></div>
+                </div>
+            </div>
+
+            <div class="profile-card" id="p2Card">
+                <div class="wireframe-header" id="p2HeaderBg">
+                    <div class="header-overlay"></div>
+                    <div class="pfp-col">
+                        <div class="avatar-wrapper">
+                            <div class="avatar" id="p2Avatar"></div>
+                            <div class="online-tag hidden" id="p2OnlineTag"><span class="green-dot"></span>Online</div>
+                        </div>
+                        <h2 class="player-name" id="p2Name">Player 2</h2>
+                    </div>
+                    <div class="header-details">
+                        <div class="flag-and-badges">
+                            <div class="supporter-tag hidden" id="p2SupporterTag">Supporter</div>
+                            <div class="flag-box" id="p2Flag"></div>
+                            <div class="playstyle-text" id="p2PlaystyleText"></div>
+                        </div>
+                        <div class="xp-container">
+                            <div class="xp-text" id="p2XpText">Level 0 (0%)</div>
+                            <div class="xp-bar-bg"><div class="xp-bar-fill" id="p2XpFill"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-list-box">
+                    <h3 class="stats-title">Stats:</h3>
+                    <div class="stat-row"><span class="stat-name color-rank shimmer-text">Global Rank</span><span class="stat-val" id="p2Rank">--</span></div>
+                    <div class="stat-row"><span class="stat-name color-rank shimmer-text">Country Rank</span><span class="stat-val" id="p2Country">--</span></div>
+                    <div class="stat-row"><span class="stat-name color-pp shimmer-text">Performance (PP)</span><span class="stat-val" id="p2PP">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Hit Accuracy</span><span class="stat-val" id="p2Acc">--</span></div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Max Combo</span><span class="stat-val" id="p2Combo">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Play Count</span><span class="stat-val" id="p2PlayCount">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Play Time</span><span class="stat-val" id="p2PlayTime">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Ranked Score</span><span class="stat-val" id="p2Score">--</span></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // ==========================================
+        //         1. UI TOGGLE LOGIC
+        // ==========================================
+        const btnSingle = document.getElementById('btnSingleMode');
+        const btnCompare = document.getElementById('btnCompareMode');
+        
+        const singleSearchBox = document.getElementById('singleSearchBox');
+        const dualSearchBox = document.getElementById('dualSearchBox');
+        
+        const singleView = document.getElementById('singleProfileView');
+        const compareView = document.getElementById('comparisonView');
+
+        btnSingle.addEventListener('click', () => {
+            btnSingle.classList.add('active');
+            btnCompare.classList.remove('active');
+            
+            singleSearchBox.classList.remove('hidden');
+            singleView.classList.remove('hidden');
+            dualSearchBox.classList.add('hidden');
+            compareView.classList.add('hidden');
+        });
+
+        btnCompare.addEventListener('click', () => {
+            btnCompare.classList.add('active');
+            btnSingle.classList.remove('active');
+            
+            dualSearchBox.classList.remove('hidden');
+            compareView.classList.remove('hidden');
+            singleSearchBox.classList.add('hidden');
+            singleView.classList.add('hidden');
+        });
+
+        // ==========================================
+        //         2. GLOBAL HELPERS
+        // ==========================================
+        const WORKER_URL = "https://osu-tracker-api.eliamelliger.workers.dev";
+        
+        function animateValue(element, start, end, duration, isFloat = false, prefix = '', suffix = '') {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const currentVal = start + easeProgress * (end - start);
+
+                if (isFloat) {
+                    element.innerText = prefix + currentVal.toFixed(2) + suffix;
+                } else {
+                    element.innerText = prefix + Math.floor(currentVal).toLocaleString() + suffix;
+                }
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    element.innerText = prefix + (isFloat ? end.toFixed(2) : end.toLocaleString()) + suffix;
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // ==========================================
+        //         3. SINGLE PLAYER ENGINE
+        // ==========================================
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+
+        async function fetchPlayerData(username) {
+            try {
+                searchBtn.innerText = "Loading...";
+
+                const response = await fetch(`${WORKER_URL}?user=${username}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    alert("Player not found!");
+                    searchBtn.innerText = "Search";
+                    return;
+                }
+                
+                const headerBg = document.getElementById('headerBg');
+                if (data.cover_url) {
+                    headerBg.style.backgroundImage = `url('${data.cover_url}')`;
+                } else {
+                    headerBg.style.backgroundImage = 'none';
+                }
+
+                document.getElementById('playerName').innerText = data.username;
+                document.getElementById('playerAvatar').style.backgroundImage = `url('${data.avatar_url}')`;
+                
+                const onlineTag = document.getElementById('onlineTag');
+                if (data.is_online) {
+                    onlineTag.classList.remove('hidden');
+                } else {
+                    onlineTag.classList.add('hidden');
+                }
+
+                const supporterTag = document.getElementById('supporterTag');
+                if (data.is_supporter) {
+                    supporterTag.classList.remove('hidden');
+                } else {
+                    supporterTag.classList.add('hidden');
+                }
+
+                document.getElementById('playerFlag').style.backgroundImage = `url('https://flagcdn.com/w80/${data.country_code.toLowerCase()}.png')`;
+                
+                const playstyleText = document.getElementById('playstyleText');
+                if (data.playstyle && data.playstyle.length > 0) {
+                    playstyleText.innerText = data.playstyle.join(', ');
+                } else {
+                    playstyleText.innerText = '';
+                }
+
+                const levelProgress = data.statistics.level.progress;
+                document.getElementById('xpFill').style.width = `${levelProgress}%`;
+                document.getElementById('xpText').innerText = `Level ${data.statistics.level.current} (${levelProgress}%)`;
+
+                const rankRow = document.getElementById('playerRank').parentElement;
+                
+                if (data.statistics.global_rank) {
+                    animateValue(document.getElementById('playerRank'), 0, data.statistics.global_rank, 1500, false, '#');
+                    const peakRank = data.rank_highest ? data.rank_highest.rank.toLocaleString() : "N/A";
+                    rankRow.setAttribute('data-tooltip', `Peak Rank: #${peakRank}`);
+                } else {
+                    document.getElementById('playerRank').innerText = 'N/A';
+                    rankRow.removeAttribute('data-tooltip');
+                }
+
+                if (data.statistics.country_rank) {
+                    animateValue(document.getElementById('playerCountry'), 0, data.statistics.country_rank, 1500, false, '#');
+                } else {
+                    document.getElementById('playerCountry').innerText = 'N/A';
+                }
+
+                animateValue(document.getElementById('playerPP'), 0, Math.round(data.statistics.pp), 1500);
+                animateValue(document.getElementById('playerAcc'), 0, data.statistics.hit_accuracy, 1500, true, '', '%');
+                
+                const totalSS = data.statistics.grade_counts.ss + data.statistics.grade_counts.ssh;
+                const totalS = data.statistics.grade_counts.s + data.statistics.grade_counts.sh;
+                
+                animateValue(document.getElementById('rankSS'), 0, totalSS, 1500);
+                animateValue(document.getElementById('rankS'), 0, totalS, 1500);
+                animateValue(document.getElementById('rankA'), 0, data.statistics.grade_counts.a, 1500);
+
+                animateValue(document.getElementById('playerCombo'), 0, data.statistics.maximum_combo, 1500, false, '', 'x');
+                animateValue(document.getElementById('playerPlayCount'), 0, data.statistics.play_count, 1500);
+                
+                const hoursPlayed = Math.round(data.statistics.play_time / 3600);
+                animateValue(document.getElementById('playerPlayTime'), 0, hoursPlayed, 1500, false, '', ' hrs');
+                
+                const daysPlayed = (data.statistics.play_time / 86400).toFixed(1);
+                document.getElementById('playerPlayTime').parentElement.setAttribute('data-tooltip', `Equals ${daysPlayed} full days`);
+
+                animateValue(document.getElementById('playerScore'), 0, data.statistics.ranked_score, 1500);
+
+                const joinDate = new Date(data.join_date);
+                const formattedDate = joinDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+                document.getElementById('playerJoinDate').innerText = formattedDate;
+                
+                const today = new Date();
+                let years = today.getFullYear() - joinDate.getFullYear();
+                let months = today.getMonth() - joinDate.getMonth();
+                if (months < 0) { years--; months += 12; }
+                
+                const timeSinceStr = years > 0 ? `${years} yrs, ${months} mos ago` : `${months} mos ago`;
+                document.getElementById('playerJoinDate').parentElement.setAttribute('data-tooltip', timeSinceStr);
+
+                searchBtn.innerText = "Search";
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                alert("Something went wrong!");
+                searchBtn.innerText = "Search";
+            }
+        }
+
+        searchBtn.addEventListener('click', () => {
+            const username = searchInput.value.trim();
+            if (username) fetchPlayerData(username);
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchBtn.click();
+        });
+
+
+        // ==========================================
+        //         4. COMPARISON ENGINE
+        // ==========================================
+        const compareBtn = document.getElementById('compareBtn');
+        const searchInput1 = document.getElementById('searchInput1');
+        const searchInput2 = document.getElementById('searchInput2');
+
+        // Math judge: Sets Green/Red text
+        function judgeStat(val1, val2, elementId1, elementId2, lowerIsBetter = false) {
+            const el1 = document.getElementById(elementId1);
+            const el2 = document.getElementById(elementId2);
+            
+            // Reset colors
+            el1.className = 'stat-val'; el2.className = 'stat-val';
+
+            if (val1 === val2) return; 
+
+            const p1Wins = lowerIsBetter ? (val1 < val2) : (val1 > val2);
+
+            if (p1Wins) {
+                el1.classList.add('stat-better');
+                el2.classList.add('stat-worse');
+            } else {
+                el2.classList.add('stat-better');
+                el1.classList.add('stat-worse');
+            }
+        }
+
+        // Fills either Player 1 or Player 2 card
+        function fillCompareCard(prefix, data) {
+            document.getElementById(`${prefix}HeaderBg`).style.backgroundImage = data.cover_url ? `url('${data.cover_url}')` : 'none';
+            document.getElementById(`${prefix}Name`).innerText = data.username;
+            document.getElementById(`${prefix}Avatar`).style.backgroundImage = `url('${data.avatar_url}')`;
+            document.getElementById(`${prefix}Flag`).style.backgroundImage = `url('https://flagcdn.com/w80/${data.country_code.toLowerCase()}.png')`;
+            
+            document.getElementById(`${prefix}OnlineTag`).classList.toggle('hidden', !data.is_online);
+            document.getElementById(`${prefix}SupporterTag`).classList.toggle('hidden', !data.is_supporter);
+            document.getElementById(`${prefix}PlaystyleText`).innerText = data.playstyle ? data.playstyle.join(', ') : '';
+
+            const p = data.statistics.level.progress;
+            document.getElementById(`${prefix}XpFill`).style.width = `${p}%`;
+            document.getElementById(`${prefix}XpText`).innerText = `Level ${data.statistics.level.current} (${p}%)`;
+
+            const stats = data.statistics;
+            animateValue(document.getElementById(`${prefix}Rank`), 0, stats.global_rank || 0, 1500, false, '#');
+            animateValue(document.getElementById(`${prefix}Country`), 0, stats.country_rank || 0, 1500, false, '#');
+            animateValue(document.getElementById(`${prefix}PP`), 0, Math.round(stats.pp), 1500);
+            animateValue(document.getElementById(`${prefix}Acc`), 0, stats.hit_accuracy, 1500, true, '', '%');
+            
+            animateValue(document.getElementById(`${prefix}Combo`), 0, stats.maximum_combo, 1500, false, '', 'x');
+            animateValue(document.getElementById(`${prefix}PlayCount`), 0, stats.play_count, 1500);
+            animateValue(document.getElementById(`${prefix}PlayTime`), 0, Math.round(stats.play_time / 3600), 1500, false, '', ' hrs');
+            animateValue(document.getElementById(`${prefix}Score`), 0, stats.ranked_score, 1500);
+        }
+
+        compareBtn.addEventListener('click', async () => {
+            const user1 = searchInput1.value.trim();
+            const user2 = searchInput2.value.trim();
+            
+            if (!user1 || !user2) return alert("Please enter two usernames to compare!");
+
+            compareBtn.innerText = "Fighting...";
+
+            try {
+                // Fetch BOTH players simultaneously!
+                const [res1, res2] = await Promise.all([
+                    fetch(`${WORKER_URL}?user=${user1}`),
+                    fetch(`${WORKER_URL}?user=${user2}`)
+                ]);
+                
+                const data1 = await res1.json();
+                const data2 = await res2.json();
+
+                if (data1.error || data2.error) {
+                    alert("One or both players could not be found!");
+                    compareBtn.innerText = "Compare";
+                    return;
+                }
+
+                // Push data to cards
+                fillCompareCard('p1', data1);
+                fillCompareCard('p2', data2);
+
+                // Wait 1.5s for the animations to finish, then light up the winner!
+                setTimeout(() => {
+                    const s1 = data1.statistics; const s2 = data2.statistics;
+                    
+                    // Ranks (Pass 'true' because lower rank is better)
+                    judgeStat(s1.global_rank || Infinity, s2.global_rank || Infinity, 'p1Rank', 'p2Rank', true);
+                    judgeStat(s1.country_rank || Infinity, s2.country_rank || Infinity, 'p1Country', 'p2Country', true);
+                    
+                    // Stats (Higher is better)
+                    judgeStat(s1.pp, s2.pp, 'p1PP', 'p2PP');
+                    judgeStat(s1.hit_accuracy, s2.hit_accuracy, 'p1Acc', 'p2Acc');
+                    judgeStat(s1.maximum_combo, s2.maximum_combo, 'p1Combo', 'p2Combo');
+                    judgeStat(s1.play_count, s2.play_count, 'p1PlayCount', 'p2PlayCount');
+                    judgeStat(s1.play_time, s2.play_time, 'p1PlayTime', 'p2PlayTime');
+                    judgeStat(s1.ranked_score, s2.ranked_score, 'p1Score', 'p2Score');
+                    
+                }, 1500);
+
+                compareBtn.innerText = "Compare";
+
+            } catch (error) {
+                console.error("Comparison error:", error);
+                alert("Something went wrong!");
+                compareBtn.innerText = "Compare";
+            }
+        });
+
+        searchInput1.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') compareBtn.click();
+        });
+        searchInput2.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') compareBtn.click();
+        });
+
+        // Load Peppy by default when you open the page
+        window.onload = () => {
+            fetchPlayerData('Peppy'); 
+        };
+    </script>
+</body>
+</html>
