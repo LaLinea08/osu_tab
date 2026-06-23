@@ -220,6 +220,31 @@
         .stat-divider {
             height: 20px;
         }
+        /* --- STAT COLORS & GLOWS --- */
+        .color-rank {
+            color: #73d0ff; /* Icy Blue */
+            text-shadow: 0 0 10px rgba(115, 208, 255, 0.4);
+        }
+        
+        .color-pp {
+            color: var(--osu-pink); /* Signature Pink */
+            text-shadow: 0 0 12px rgba(255, 102, 170, 0.5);
+        }
+
+        .color-ss {
+            color: #e0e0e0; /* Silver */
+            text-shadow: 0 0 10px rgba(224, 224, 224, 0.5);
+        }
+
+        .color-s {
+            color: #ffd966; /* Gold */
+            text-shadow: 0 0 10px rgba(255, 217, 102, 0.5);
+        }
+
+        .color-a {
+            color: #a2e043; /* Bright Green */
+            text-shadow: 0 0 10px rgba(162, 224, 67, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -262,19 +287,20 @@
                 </div>
             </div>
 
+            <!-- Bottom Stats List Section -->
             <div class="stats-list-box">
                 <h3 class="stats-title">Stats List:</h3>
                 
-                <div class="stat-row"><span class="stat-name">Global Rank</span><span class="stat-val" id="playerRank">--</span></div>
+                <div class="stat-row"><span class="stat-name">Global Rank</span><span class="stat-val color-rank" id="playerRank">--</span></div>
                 <div class="stat-row"><span class="stat-name">Country Rank</span><span class="stat-val" id="playerCountry">--</span></div>
-                <div class="stat-row"><span class="stat-name">Performance (PP)</span><span class="stat-val" id="playerPP">--</span></div>
+                <div class="stat-row"><span class="stat-name">Performance (PP)</span><span class="stat-val color-pp" id="playerPP">--</span></div>
                 <div class="stat-row"><span class="stat-name">Hit Accuracy</span><span class="stat-val" id="playerAcc">--</span></div>
                 
                 <div class="stat-divider"></div>
                 
-                <div class="stat-row"><span class="stat-name">SS Ranks</span><span class="stat-val" id="rankSS">--</span></div>
-                <div class="stat-row"><span class="stat-name">S Ranks</span><span class="stat-val" id="rankS">--</span></div>
-                <div class="stat-row"><span class="stat-name">A Ranks</span><span class="stat-val" id="rankA">--</span></div>
+                <div class="stat-row"><span class="stat-name">SS Ranks</span><span class="stat-val color-ss" id="rankSS">--</span></div>
+                <div class="stat-row"><span class="stat-name">S Ranks</span><span class="stat-val color-s" id="rankS">--</span></div>
+                <div class="stat-row"><span class="stat-name">A Ranks</span><span class="stat-val color-a" id="rankA">--</span></div>
                 
                 <div class="stat-divider"></div>
                 
