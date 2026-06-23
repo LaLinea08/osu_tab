@@ -71,6 +71,36 @@
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
 
+        // --- NEW: Smooth Number Counter Function ---
+        function animateValue(element, start, end, duration, isFloat = false, prefix = '', suffix = '') {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                // Calculate how far along the animation is (from 0 to 1)
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                
+                // "Ease Out" math: makes the counter slow down smoothly as it reaches the end
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const currentVal = start + easeProgress * (end - start);
+
+                // Format the number properly while it counts
+                if (isFloat) {
+                    element.innerText = prefix + currentVal.toFixed(2) + suffix;
+                } else {
+                    element.innerText = prefix + Math.floor(currentVal).toLocaleString() + suffix;
+                }
+
+                // If not finished, keep animating
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    // Force the exact final number at the end just to be safe
+                    element.innerText = prefix + (isFloat ? end.toFixed(2) : end.toLocaleString()) + suffix;
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
         async function fetchPlayerData(username) {
             try {
                 searchBtn.innerText = "Loading...";
@@ -84,40 +114,51 @@
                     return;
                 }
 
-                // Top Section (Avatar, Name, Flag, XP)
+                // --- 1. Top Section (Avatar, Name, Flag, XP) ---
                 document.getElementById('playerName').innerText = data.username;
                 document.getElementById('playerAvatar').style.backgroundImage = `url('${data.avatar_url}')`;
-                
-                // Fetch high-res flag using the player's country code
                 document.getElementById('playerFlag').style.backgroundImage = `url('https://flagcdn.com/w80/${data.country_code.toLowerCase()}.png')`;
                 
-                // Update XP Bar
                 const levelProgress = data.statistics.level.progress;
                 document.getElementById('xpFill').style.width = `${levelProgress}%`;
                 document.getElementById('xpText').innerText = `Level ${data.statistics.level.current} (${levelProgress}%)`;
 
-                // Core Stats
-                document.getElementById('playerRank').innerText = `#${data.statistics.global_rank?.toLocaleString() || 'N/A'}`;
-                document.getElementById('playerCountry').innerText = `#${data.statistics.country_rank?.toLocaleString() || 'N/A'}`;
-                document.getElementById('playerPP').innerText = `${Math.round(data.statistics.pp).toLocaleString()}`;
-                document.getElementById('playerAcc').innerText = `${data.statistics.hit_accuracy.toFixed(2)}%`;
+                // --- 2. Core Stats (WITH ANIMATION) ---
+                // Global Rank (Checks if they have a rank first)
+                if (data.statistics.global_rank) {
+                    animateValue(document.getElementById('playerRank'), 0, data.statistics.global_rank, 1500, false, '#');
+                } else {
+                    document.getElementById('playerRank').innerText = 'N/A';
+                }
+
+                // Country Rank
+                if (data.statistics.country_rank) {
+                    animateValue(document.getElementById('playerCountry'), 0, data.statistics.country_rank, 1500, false, '#');
+                } else {
+                    document.getElementById('playerCountry').innerText = 'N/A';
+                }
+
+                // Performance Points & Accuracy
+                animateValue(document.getElementById('playerPP'), 0, Math.round(data.statistics.pp), 1500);
+                animateValue(document.getElementById('playerAcc'), 0, data.statistics.hit_accuracy, 1500, true, '', '%'); // 'true' means it handles decimals
                 
-                // Grades (SS, S, A)
+                // --- 3. Grades (WITH ANIMATION) ---
                 const totalSS = data.statistics.grade_counts.ss + data.statistics.grade_counts.ssh;
                 const totalS = data.statistics.grade_counts.s + data.statistics.grade_counts.sh;
-                document.getElementById('rankSS').innerText = totalSS.toLocaleString();
-                document.getElementById('rankS').innerText = totalS.toLocaleString();
-                document.getElementById('rankA').innerText = data.statistics.grade_counts.a.toLocaleString();
+                
+                animateValue(document.getElementById('rankSS'), 0, totalSS, 1500);
+                animateValue(document.getElementById('rankS'), 0, totalS, 1500);
+                animateValue(document.getElementById('rankA'), 0, data.statistics.grade_counts.a, 1500);
 
-                // Extra Stats
-                document.getElementById('playerCombo').innerText = `${data.statistics.maximum_combo.toLocaleString()}x`;
-                document.getElementById('playerPlayCount').innerText = data.statistics.play_count.toLocaleString();
+                // --- 4. Extra Stats (WITH ANIMATION) ---
+                animateValue(document.getElementById('playerCombo'), 0, data.statistics.maximum_combo, 1500, false, '', 'x');
+                animateValue(document.getElementById('playerPlayCount'), 0, data.statistics.play_count, 1500);
                 
                 const hoursPlayed = Math.round(data.statistics.play_time / 3600);
-                document.getElementById('playerPlayTime').innerText = `${hoursPlayed.toLocaleString()} hrs`;
-                document.getElementById('playerScore').innerText = data.statistics.ranked_score.toLocaleString();
+                animateValue(document.getElementById('playerPlayTime'), 0, hoursPlayed, 1500, false, '', ' hrs');
+                animateValue(document.getElementById('playerScore'), 0, data.statistics.ranked_score, 1500);
 
-                // Format Join Date beautifully (e.g., "October 2015")
+                // Format Join Date beautifully (Does NOT animate since it is a word)
                 const joinDate = new Date(data.join_date);
                 const formattedDate = joinDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
                 document.getElementById('playerJoinDate').innerText = formattedDate;
