@@ -99,6 +99,18 @@ nav a:hover::after, nav a.active::after {
     background-color: var(--osu-pink);
     box-shadow: 0 -2px 10px var(--osu-pink);
 }
+/* --- The Milky Glass Tab --- */
+nav a.milky-tab {
+    background: rgba(255, 255, 255, 0.08); /* Faint, milky translucent white */
+    border-left: 1px solid rgba(255, 255, 255, 0.05); /* Faint left glass edge */
+    border-right: 1px solid rgba(255, 255, 255, 0.05); /* Faint right glass edge */
+}
+
+/* Make the milky effect slightly brighter when you hover over it */
+nav a.milky-tab:hover {
+    background: rgba(255, 255, 255, 0.15); 
+    /* Your pink bottom-border glow will still automatically apply to this! */
+}
 
 /* Navbar Title & Glow */
 .nav-title {
