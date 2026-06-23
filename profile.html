@@ -150,18 +150,33 @@
                 animateValue(document.getElementById('rankS'), 0, totalS, 1500);
                 animateValue(document.getElementById('rankA'), 0, data.statistics.grade_counts.a, 1500);
 
-                // --- 4. Extra Stats (WITH ANIMATION) ---
+               // --- 4. Extra Stats (WITH ANIMATION & TOOLTIPS) ---
                 animateValue(document.getElementById('playerCombo'), 0, data.statistics.maximum_combo, 1500, false, '', 'x');
                 animateValue(document.getElementById('playerPlayCount'), 0, data.statistics.play_count, 1500);
                 
+                // Play Time + Days Tooltip
                 const hoursPlayed = Math.round(data.statistics.play_time / 3600);
                 animateValue(document.getElementById('playerPlayTime'), 0, hoursPlayed, 1500, false, '', ' hrs');
+                
+                // Calculate Playtime in Days
+                const daysPlayed = (data.statistics.play_time / 86400).toFixed(1);
+                document.getElementById('playerPlayTime').parentElement.setAttribute('data-tooltip', `Equals ${daysPlayed} full days`);
+
                 animateValue(document.getElementById('playerScore'), 0, data.statistics.ranked_score, 1500);
 
-                // Format Join Date beautifully (Does NOT animate since it is a word)
+                // Join Date + Time Since Joined Tooltip
                 const joinDate = new Date(data.join_date);
                 const formattedDate = joinDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
                 document.getElementById('playerJoinDate').innerText = formattedDate;
+                
+                // Calculate years and months since joining
+                const today = new Date();
+                let years = today.getFullYear() - joinDate.getFullYear();
+                let months = today.getMonth() - joinDate.getMonth();
+                if (months < 0) { years--; months += 12; }
+                
+                const timeSinceStr = years > 0 ? `${years} yrs, ${months} mos ago` : `${months} mos ago`;
+                document.getElementById('playerJoinDate').parentElement.setAttribute('data-tooltip', timeSinceStr);
 
                 searchBtn.innerText = "Search";
 
