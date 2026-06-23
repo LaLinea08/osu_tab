@@ -3,49 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple osu! Style Page</title>
+    <title>osu! Style Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --osu-pink: #ff66aa;
+            --osu-pink-hover: #ff88bb;
+            --bg-darker: #1c1a21;
+            --bg-dark: #2a2230;
+            --bg-card: #382e43;
+            --text-main: #fff;
+            --text-muted: #bdaec6;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #2C2F33;
-            color: #F5F8FA;
+            font-family: 'Exo 2', Arial, sans-serif;
+            background-color: var(--bg-darker);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            flex-direction: column;
+            min-height: 100vh;
         }
+
+        /* Top Navbar */
         header {
-            background-color: #4B4E53;
-            padding: 1em;
-            text-align: center;
+            background-color: var(--bg-dark);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Quick representation of the osu! pink circle */
+        .osu-logo-circle {
+            width: 35px;
+            height: 35px;
+            background-color: var(--osu-pink);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--osu-pink);
+            transition: transform 0.2s ease;
+        }
+
+        .osu-logo-circle:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
         nav {
-            margin-top: 1em;
+            display: flex;
+            height: 100%;
         }
+
         nav a {
-            color: #F5F8FA;
+            color: var(--text-muted);
             text-decoration: none;
-            margin-right: 1em;
+            font-weight: 600;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            transition: color 0.2s ease;
         }
+
+        nav a:hover {
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        /* The signature pink bottom border on active/hovered items */
+        nav a:hover::after, nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--osu-pink);
+        }
+
+        /* Main Content Container */
         main {
-            margin-top: 2em;
+            flex: 1;
+            max-width: 1000px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .welcome-card {
+            background-color: var(--bg-card);
+            border-radius: 10px;
+            padding: 30px;
+            border-left: 5px solid var(--osu-pink);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .welcome-card h2 {
+            margin-top: 0;
+            font-weight: 800;
+            font-size: 1.8rem;
+        }
+
+        .welcome-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--osu-pink);
+            color: white;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(255, 102, 170, 0.3);
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--osu-pink-hover);
+            transform: translateY(-1px);
         }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>Welcome to osu!</h1>
+        <div class="nav-container">
+            <div class="logo-area">
+                <span class="osu-logo-circle"></span>
+                <h1>osu!</h1>
+            </div>
+            <nav>
+                <a href="#" class="active">home</a>
+                <a href="#">beatmaps</a>
+                <a href="#">rankings</a>
+                <a href="#">community</a>
+                <a href="#">help</a>
+            </nav>
+        </div>
     </header>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Support</a>
-        <a href="#">Help</a>
-    </nav>
+
     <main>
-        <p>This is a simple page styled to resemble the osu! website.</p>
+        <div class="welcome-card">
+            <h2>Welcome to the rhythm!</h2>
+            <p>This layout uses osu!'s actual styling language: rich plum backgrounds, vibrant pink accents, rounded UI cards, and the signature <strong>Exo 2</strong> typography.</p>
+            <a href="#" class="btn-primary">Download osu!</a>
+        </div>
     </main>
+
 </body>
 </html>
