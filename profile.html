@@ -245,6 +245,31 @@
             color: #a2e043; /* Bright Green */
             text-shadow: 0 0 10px rgba(162, 224, 67, 0.5);
         }
+        /* --- STAT COLORS & SHIMMER --- */
+        .color-rank { color: #73d0ff; } /* Icy Blue */
+        .color-pp   { color: var(--osu-pink); } /* Signature Pink */
+        .color-ss   { color: #e0e0e0; } /* Silver */
+        .color-s    { color: #ffd966; } /* Gold */
+        .color-a    { color: #a2e043; } /* Bright Green */
+
+        /* The Shimmer Animation Class */
+        .shimmer-text {
+            /* Runs the 'glowShimmer' animation infinitely, fading back and forth */
+            animation: glowShimmer 2.5s infinite alternate ease-in-out;
+        }
+
+        /* The actual animation instructions */
+        @keyframes glowShimmer {
+            0% {
+                opacity: 0.8;
+                text-shadow: 0 0 5px currentColor;
+            }
+            100% {
+                opacity: 1;
+                /* currentColor automatically uses whatever color the text is */
+                text-shadow: 0 0 12px currentColor, 0 0 20px currentColor;
+            }
+        }
     </style>
 </head>
 <body>
@@ -291,16 +316,16 @@
             <div class="stats-list-box">
                 <h3 class="stats-title">Stats List:</h3>
                 
-                <div class="stat-row"><span class="stat-name">Global Rank</span><span class="stat-val color-rank" id="playerRank">--</span></div>
+                <div class="stat-row"><span class="stat-name color-rank shimmer-text">Global Rank</span><span class="stat-val" id="playerRank">--</span></div>
                 <div class="stat-row"><span class="stat-name">Country Rank</span><span class="stat-val" id="playerCountry">--</span></div>
-                <div class="stat-row"><span class="stat-name">Performance (PP)</span><span class="stat-val color-pp" id="playerPP">--</span></div>
+                <div class="stat-row"><span class="stat-name color-pp shimmer-text">Performance (PP)</span><span class="stat-val" id="playerPP">--</span></div>
                 <div class="stat-row"><span class="stat-name">Hit Accuracy</span><span class="stat-val" id="playerAcc">--</span></div>
                 
                 <div class="stat-divider"></div>
                 
-                <div class="stat-row"><span class="stat-name">SS Ranks</span><span class="stat-val color-ss" id="rankSS">--</span></div>
-                <div class="stat-row"><span class="stat-name">S Ranks</span><span class="stat-val color-s" id="rankS">--</span></div>
-                <div class="stat-row"><span class="stat-name">A Ranks</span><span class="stat-val color-a" id="rankA">--</span></div>
+                <div class="stat-row"><span class="stat-name color-ss shimmer-text">SS Ranks</span><span class="stat-val" id="rankSS">--</span></div>
+                <div class="stat-row"><span class="stat-name color-s shimmer-text">S Ranks</span><span class="stat-val" id="rankS">--</span></div>
+                <div class="stat-row"><span class="stat-name color-a shimmer-text">A Ranks</span><span class="stat-val" id="rankA">--</span></div>
                 
                 <div class="stat-divider"></div>
                 
