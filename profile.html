@@ -8,13 +8,11 @@
     <style>
         :root {
             --osu-pink: #ff66aa;
-            --osu-pink-hover: #ff88bb;
             --text-main: #ffffff;
             --text-muted: #e2d9e6;
             
             /* Glassmorphism Variables */
             --glass-bg: rgba(42, 34, 48, 0.45);
-            --glass-bg-hover: rgba(56, 46, 67, 0.6);
             --glass-border: rgba(255, 255, 255, 0.08);
             --glass-blur: blur(16px);
         }
@@ -30,11 +28,10 @@
             min-height: 100vh;
         }
 
-        /* Top Navbar (Reused from your index) */
+        /* Top Navbar */
         header {
             background-color: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
             border-bottom: 1px solid var(--glass-border);
             position: sticky;
             top: 0;
@@ -52,22 +49,14 @@
         }
 
         .logo-area { display: flex; align-items: center; gap: 12px; }
-        
         .osu-logo-circle {
             width: 30px; height: 30px;
             background-color: var(--osu-pink);
             border-radius: 50%;
             box-shadow: 0 0 10px var(--osu-pink);
         }
-
         h1 { font-size: 1.5rem; font-weight: 800; margin: 0; }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 0 15px;
-        }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 600; padding: 0 15px; }
 
         /* Main Content */
         main {
@@ -79,130 +68,157 @@
             box-sizing: border-box;
         }
 
-        /* Search Bar Mini */
-        .search-bar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
+        /* Search Bar */
+        .search-bar { display: flex; gap: 10px; margin-bottom: 30px; }
         .search-bar input {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            padding: 12px 20px;
-            border-radius: 50px;
-            color: white;
-            font-family: 'Exo 2', sans-serif;
-            font-size: 1rem;
-            backdrop-filter: var(--glass-blur);
-            outline: none;
+            flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--glass-border);
+            padding: 12px 20px; border-radius: 50px; color: white; font-family: 'Exo 2', sans-serif;
+            font-size: 1rem; backdrop-filter: var(--glass-blur); outline: none;
         }
-
-        .search-bar input:focus {
-            border-color: var(--osu-pink);
-        }
-
+        .search-bar input:focus { border-color: var(--osu-pink); }
         .search-bar button {
-            background: var(--osu-pink);
-            color: white;
-            border: none;
-            padding: 0 25px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-family: 'Exo 2', sans-serif;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 102, 170, 0.2);
+            background: var(--osu-pink); color: white; border: none; padding: 0 25px;
+            border-radius: 50px; font-weight: 700; cursor: pointer;
         }
 
-        /* Player Profile Card */
+        /* --- NEW WIREFRAME LAYOUT --- */
         .profile-card {
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 40px;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        .profile-header {
+        /* Top Section: PFP, Flag, XP Bar */
+        .wireframe-header {
             display: flex;
-            align-items: center;
-            gap: 30px;
+            align-items: flex-start;
+            gap: 25px;
             margin-bottom: 30px;
-            border-bottom: 1px solid var(--glass-border);
-            padding-bottom: 30px;
         }
 
-        /* Mock Avatar */
+        .pfp-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 140px;
+        }
+
         .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 20px;
-            background: url('https://a.ppy.sh/') center/cover; /* Standard osu! avatar URL structure */
+            width: 140px;
+            height: 140px;
+            border-radius: 12px;
             background-color: rgba(255, 255, 255, 0.1);
+            background-position: center;
+            background-size: cover;
             border: 2px solid var(--osu-pink);
-            box-shadow: 0 0 20px rgba(255, 102, 170, 0.3);
+            box-shadow: 0 0 15px rgba(255, 102, 170, 0.3);
         }
 
-        .player-info h2 {
-            font-size: 2.5rem;
+        .player-name {
+            font-size: 1.4rem;
             font-weight: 800;
-            margin: 0 0 5px 0;
+            margin: 10px 0 0 0;
+            text-align: center;
+            word-break: break-all;
         }
 
-        .rank-badge {
-            display: inline-block;
-            background: var(--osu-pink);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: 0 0 10px rgba(255, 102, 170, 0.4);
-        }
-
-        .country-rank {
-            color: var(--text-muted);
-            margin-left: 10px;
-            font-weight: 600;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        .header-details {
+            flex: 1;
+            display: flex;
+            align-items: flex-end; /* Aligns items to the bottom of the row */
             gap: 20px;
+            height: 140px; /* Matches avatar height to keep it grounded */
+            padding-bottom: 5px;
+            box-sizing: border-box;
         }
 
-        .stat-box {
-            background: rgba(255, 255, 255, 0.03);
+        .flag-box {
+            width: 60px;
+            height: 40px;
+            background-color: rgba(0,0,0,0.3);
+            background-position: center;
+            background-size: cover;
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+        }
+
+        .xp-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .xp-text {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .xp-bar-bg {
+            width: 100%;
+            height: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .xp-bar-fill {
+            height: 100%;
+            width: 0%; /* Javascript updates this */
+            background: var(--osu-pink);
+            box-shadow: 0 0 10px var(--osu-pink);
+            transition: width 0.8s ease-out;
+        }
+
+        /* Bottom Section: Stats List */
+        .stats-list-box {
+            background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--glass-border);
             border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.2s ease;
+            padding: 25px;
         }
 
-        .stat-box:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 102, 170, 0.3);
-        }
-
-        .stat-label {
+        .stats-title {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            font-weight: 600;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 10px;
         }
 
-        .stat-value {
-            font-size: 1.8rem;
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 1.1rem;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-name {
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .stat-val {
             font-weight: 800;
             color: var(--text-main);
+        }
+
+        /* Group dividers in the list */
+        .stat-divider {
+            height: 20px;
         }
     </style>
 </head>
@@ -216,147 +232,141 @@
             </div>
             <nav>
                 <a href="index.html">home</a>
-                <a href="#">search</a>
+                <a href="profile.html">search</a>
             </nav>
         </div>
     </header>
 
     <main>
         <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search another player...">
-    <button id="searchBtn">Search</button>
-</div>
+            <input type="text" id="searchInput" placeholder="Search a player...">
+            <button id="searchBtn">Search</button>
+        </div>
 
         <div class="profile-card">
-    <div class="profile-header">
-        <div class="avatar" id="playerAvatar"></div>
-        <div class="player-info">
-            <h2 id="playerName">PlayerName</h2>
-            <div>
-                <span class="rank-badge" id="playerRank">#0</span>
-                <span class="country-rank" id="playerCountry">US #0</span>
+            
+            <div class="wireframe-header">
+                <div class="pfp-col">
+                    <div class="avatar" id="playerAvatar"></div>
+                    <h2 class="player-name" id="playerName">PlayerName</h2>
+                </div>
+                
+                <div class="header-details">
+                    <div class="flag-box" id="playerFlag"></div>
+                    <div class="xp-container">
+                        <div class="xp-text" id="xpText">Level 0 (0%)</div>
+                        <div class="xp-bar-bg">
+                            <div class="xp-bar-fill" id="xpFill"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div class="stats-grid">
-        <div class="stat-box">
-            <div class="stat-label">Performance</div>
-            <div class="stat-value" id="playerPP">0 pp</div>
+            <div class="stats-list-box">
+                <h3 class="stats-title">Stats List:</h3>
+                
+                <div class="stat-row"><span class="stat-name">Global Rank</span><span class="stat-val" id="playerRank">--</span></div>
+                <div class="stat-row"><span class="stat-name">Country Rank</span><span class="stat-val" id="playerCountry">--</span></div>
+                <div class="stat-row"><span class="stat-name">Performance (PP)</span><span class="stat-val" id="playerPP">--</span></div>
+                <div class="stat-row"><span class="stat-name">Hit Accuracy</span><span class="stat-val" id="playerAcc">--</span></div>
+                
+                <div class="stat-divider"></div>
+                
+                <div class="stat-row"><span class="stat-name">SS Ranks</span><span class="stat-val" id="rankSS">--</span></div>
+                <div class="stat-row"><span class="stat-name">S Ranks</span><span class="stat-val" id="rankS">--</span></div>
+                <div class="stat-row"><span class="stat-name">A Ranks</span><span class="stat-val" id="rankA">--</span></div>
+                
+                <div class="stat-divider"></div>
+                
+                <div class="stat-row"><span class="stat-name">Max Combo</span><span class="stat-val" id="playerCombo">--</span></div>
+                <div class="stat-row"><span class="stat-name">Play Count</span><span class="stat-val" id="playerPlayCount">--</span></div>
+                <div class="stat-row"><span class="stat-name">Play Time</span><span class="stat-val" id="playerPlayTime">--</span></div>
+                <div class="stat-row"><span class="stat-name">Ranked Score</span><span class="stat-val" id="playerScore">--</span></div>
+                <div class="stat-row"><span class="stat-name">Join Date</span><span class="stat-val" id="playerJoinDate">--</span></div>
+            </div>
+
         </div>
-        <div class="stat-box">
-            <div class="stat-label">Hit Accuracy</div>
-            <div class="stat-value" id="playerAcc">0.00%</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-label">Play Count</div>
-            <div class="stat-value" id="playerPlayCount">0</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-label">Max Combo</div>
-            <div class="stat-value" id="playerCombo">0x</div>
-        </div>
-        <div class="stat-box">
-                    <div class="stat-label">Level</div>
-                    <div class="stat-value" id="playerLevel">0</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Play Time</div>
-                    <div class="stat-value" id="playerPlayTime">0h</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Ranked Score</div>
-                    <div class="stat-value" id="playerScore">0</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">SS / S Ranks</div>
-                    <div class="stat-value" id="playerRanks">0 / 0</div>
-                </div>
-    </div>
-</div>
     </main>
-<script>
-    // 1. Put your actual Cloudflare Worker URL here
-    const WORKER_URL = "https://osu-tracker-api.eliamelliger.workers.dev";
 
-    // 2. Grab the elements from the page
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.getElementById('searchBtn');
+    <script>
+        // *** PUT YOUR WORKER URL HERE ***
+        const WORKER_URL = "https://osu-tracker-api.eliamelliger.workers.dev";
 
-    // 3. The function that gets the data
-    async function fetchPlayerData(username) {
-        try {
-            // Change button text so the user knows it's working
-            searchBtn.innerText = "Loading...";
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
 
-            // Ask your Worker for the data
-            const response = await fetch(`${WORKER_URL}?user=${username}`);
-            const data = await response.json();
+        async function fetchPlayerData(username) {
+            try {
+                searchBtn.innerText = "Loading...";
 
-            if (data.error) {
-                alert("Player not found!");
+                const response = await fetch(`${WORKER_URL}?user=${username}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    alert("Player not found!");
+                    searchBtn.innerText = "Search";
+                    return;
+                }
+
+                // Top Section (Avatar, Name, Flag, XP)
+                document.getElementById('playerName').innerText = data.username;
+                document.getElementById('playerAvatar').style.backgroundImage = `url('${data.avatar_url}')`;
+                
+                // Fetch high-res flag using the player's country code
+                document.getElementById('playerFlag').style.backgroundImage = `url('https://flagcdn.com/w80/${data.country_code.toLowerCase()}.png')`;
+                
+                // Update XP Bar
+                const levelProgress = data.statistics.level.progress;
+                document.getElementById('xpFill').style.width = `${levelProgress}%`;
+                document.getElementById('xpText').innerText = `Level ${data.statistics.level.current} (${levelProgress}%)`;
+
+                // Core Stats
+                document.getElementById('playerRank').innerText = `#${data.statistics.global_rank?.toLocaleString() || 'N/A'}`;
+                document.getElementById('playerCountry').innerText = `#${data.statistics.country_rank?.toLocaleString() || 'N/A'}`;
+                document.getElementById('playerPP').innerText = `${Math.round(data.statistics.pp).toLocaleString()}`;
+                document.getElementById('playerAcc').innerText = `${data.statistics.hit_accuracy.toFixed(2)}%`;
+                
+                // Grades (SS, S, A)
+                const totalSS = data.statistics.grade_counts.ss + data.statistics.grade_counts.ssh;
+                const totalS = data.statistics.grade_counts.s + data.statistics.grade_counts.sh;
+                document.getElementById('rankSS').innerText = totalSS.toLocaleString();
+                document.getElementById('rankS').innerText = totalS.toLocaleString();
+                document.getElementById('rankA').innerText = data.statistics.grade_counts.a.toLocaleString();
+
+                // Extra Stats
+                document.getElementById('playerCombo').innerText = `${data.statistics.maximum_combo.toLocaleString()}x`;
+                document.getElementById('playerPlayCount').innerText = data.statistics.play_count.toLocaleString();
+                
+                const hoursPlayed = Math.round(data.statistics.play_time / 3600);
+                document.getElementById('playerPlayTime').innerText = `${hoursPlayed.toLocaleString()} hrs`;
+                document.getElementById('playerScore').innerText = data.statistics.ranked_score.toLocaleString();
+
+                // Format Join Date beautifully (e.g., "October 2015")
+                const joinDate = new Date(data.join_date);
+                const formattedDate = joinDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+                document.getElementById('playerJoinDate').innerText = formattedDate;
+
                 searchBtn.innerText = "Search";
-                return;
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                alert("Something went wrong!");
+                searchBtn.innerText = "Search";
             }
-
-            // 4. Inject the data into your HTML!
-            document.getElementById('playerName').innerText = data.username;
-            document.getElementById('playerAvatar').style.backgroundImage = `url('${data.avatar_url}')`;
-            
-            // Format numbers nicely with commas (e.g., 10000 -> 10,000)
-            document.getElementById('playerRank').innerText = `#${data.statistics.global_rank?.toLocaleString() || 'N/A'}`;
-            document.getElementById('playerCountry').innerText = `${data.country_code} #${data.statistics.country_rank?.toLocaleString() || 'N/A'}`;
-            
-            document.getElementById('playerPP').innerText = `${Math.round(data.statistics.pp).toLocaleString()} pp`;
-            document.getElementById('playerAcc').innerText = `${data.statistics.hit_accuracy.toFixed(2)}%`;
-            document.getElementById('playerPlayCount').innerText = data.statistics.play_count.toLocaleString();
-            document.getElementById('playerCombo').innerText = `${data.statistics.maximum_combo.toLocaleString()}x`;
-
-            // --- NEW STATS ---
-            // Level
-            document.getElementById('playerLevel').innerText = data.statistics.level.current;
-            
-            // Play time is given in seconds, so we divide by 3600 to get hours
-            const hoursPlayed = Math.round(data.statistics.play_time / 3600);
-            document.getElementById('playerPlayTime').innerText = `${hoursPlayed.toLocaleString()}h`;
-            
-            // Ranked Score
-            document.getElementById('playerScore').innerText = data.statistics.ranked_score.toLocaleString();
-            
-            // Grades (combining normal SS/S with silver SS/S)
-            const totalSS = data.statistics.grade_counts.ss + data.statistics.grade_counts.ssh;
-            const totalS = data.statistics.grade_counts.s + data.statistics.grade_counts.sh;
-            document.getElementById('playerRanks').innerText = `${totalSS.toLocaleString()} / ${totalS.toLocaleString()}`;
-
-            // Reset button text
-            searchBtn.innerText = "Search";
-
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            alert("Something went wrong!");
-            searchBtn.innerText = "Search";
         }
-    }
 
-    // 5. Make the button run the function
-    searchBtn.addEventListener('click', () => {
-        const username = searchInput.value.trim();
-        if (username) {
-            fetchPlayerData(username);
-        }
-    });
+        searchBtn.addEventListener('click', () => {
+            const username = searchInput.value.trim();
+            if (username) fetchPlayerData(username);
+        });
 
-    // 6. Make hitting "Enter" on the keyboard work too
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            searchBtn.click();
-        }
-    });
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchBtn.click();
+        });
 
-    // Optional: Load a default player when the page first opens
-    window.onload = () => {
-        fetchPlayerData('mrekk'); // Loads the current #1 player automatically
-    };
-</script>
+        window.onload = () => {
+            fetchPlayerData('mrekk'); 
+        };
+    </script>
 </body>
 </html>
