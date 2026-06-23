@@ -123,12 +123,19 @@
                 document.getElementById('xpFill').style.width = `${levelProgress}%`;
                 document.getElementById('xpText').innerText = `Level ${data.statistics.level.current} (${levelProgress}%)`;
 
-                // --- 2. Core Stats (WITH ANIMATION) ---
-                // Global Rank (Checks if they have a rank first)
+                // --- 2. Core Stats (WITH ANIMATION & TOOLTIP) ---
+                const rankRow = document.getElementById('playerRank').parentElement;
+                
+                // Global Rank + Peak Rank Tooltip
                 if (data.statistics.global_rank) {
                     animateValue(document.getElementById('playerRank'), 0, data.statistics.global_rank, 1500, false, '#');
+                    
+                    // Fetch highest rank and attach to the tooltip
+                    const peakRank = data.rank_highest ? data.rank_highest.rank.toLocaleString() : "N/A";
+                    rankRow.setAttribute('data-tooltip', `Peak Rank: #${peakRank}`);
                 } else {
                     document.getElementById('playerRank').innerText = 'N/A';
+                    rankRow.removeAttribute('data-tooltip'); // Hides tooltip if unranked
                 }
 
                 // Country Rank
@@ -140,7 +147,7 @@
 
                 // Performance Points & Accuracy
                 animateValue(document.getElementById('playerPP'), 0, Math.round(data.statistics.pp), 1500);
-                animateValue(document.getElementById('playerAcc'), 0, data.statistics.hit_accuracy, 1500, true, '', '%'); // 'true' means it handles decimals
+                animateValue(document.getElementById('playerAcc'), 0, data.statistics.hit_accuracy, 1500, true, '', '%');// 'true' means it handles decimals
                 
                 // --- 3. Grades (WITH ANIMATION) ---
                 const totalSS = data.statistics.grade_counts.ss + data.statistics.grade_counts.ssh;
