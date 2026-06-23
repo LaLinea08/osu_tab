@@ -187,20 +187,11 @@
 <body>
 
     <header>
-        <!-- The background glow attached to the navbar -->
-        <div class="ambient-glow"></div>
-        
-        <div class="nav-container">
-            <div class="logo-area">
-                <span class="osu-logo-circle"></span>
-                <h1 class="nav-title">osu!<span>tab</span></h1>
-            </div>
-            
-           <nav>
-                <a href="index.html" class="active">home</a>
-                <a href="https://osu.ppy.sh" target="_blank">official osu!</a>
-            </nav>
-        </div>
+       <!-- This loads the JavaScript component -->
+    <script src="navbar.js"></script>
+    
+    <!-- This places the navbar and tells it to use the name "Hub" -->
+    <top-navbar page-name="Hub"></top-navbar>
     </header>
 
     <main>
