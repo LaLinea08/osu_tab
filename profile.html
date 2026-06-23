@@ -6,14 +6,13 @@
     <title>osu! Player Stats</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <script src="navbar.js"></script>
     <top-navbar page-name="Stats"></top-navbar>
 
-    <main><main>
+    <main>
         <div class="mode-toggle-container">
             <div class="mode-toggle">
                 <button id="btnSingleMode" class="toggle-btn active">Single Player</button>
@@ -35,16 +34,66 @@
 
         <div id="singleProfileView">
             <div class="profile-card">
+                
+                <div class="wireframe-header" id="headerBg">
+                    <div class="header-overlay"></div>
+                    
+                    <div class="pfp-col">
+                        <div class="avatar-wrapper">
+                            <div class="avatar" id="playerAvatar"></div>
+                            <div class="online-tag hidden" id="onlineTag"><span class="green-dot"></span>Online</div>
+                        </div>
+                        <h2 class="player-name" id="playerName">PlayerName</h2>
+                    </div>
+                    
+                    <div class="header-details">
+                        <div class="flag-and-badges">
+                            <div class="supporter-tag hidden" id="supporterTag">Supporter</div>
+                            <div class="flag-box" id="playerFlag"></div>
+                            <div class="playstyle-text" id="playstyleText"></div>
+                        </div>
+                        
+                        <div class="xp-container">
+                            <div class="xp-text" id="xpText">Level 0 (0%)</div>
+                            <div class="xp-bar-bg">
+                                <div class="xp-bar-fill" id="xpFill"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="stats-list-box">
+                    <h3 class="stats-title">Stats List:</h3>
+                    
+                    <div class="stat-row"><span class="stat-name color-rank shimmer-text">Global Rank</span><span class="stat-val" id="playerRank">--</span></div>
+                    <div class="stat-row"><span class="stat-name color-rank shimmer-text">Country Rank</span><span class="stat-val" id="playerCountry">--</span></div>
+                    <div class="stat-row"><span class="stat-name color-pp shimmer-text">Performance (PP)</span><span class="stat-val" id="playerPP">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Hit Accuracy</span><span class="stat-val" id="playerAcc">--</span></div>
+
+                    <div class="stat-divider"></div>
+
+                    <div class="stat-row"><span class="stat-name color-ss shimmer-text">SS Ranks</span><span class="stat-val" id="rankSS">--</span></div>
+                    <div class="stat-row"><span class="stat-name color-s shimmer-text">S Ranks</span><span class="stat-val" id="rankS">--</span></div>
+                    <div class="stat-row"><span class="stat-name color-a shimmer-text">A Ranks</span><span class="stat-val" id="rankA">--</span></div>
+
+                    <div class="stat-divider"></div>
+
+                    <div class="stat-row"><span class="stat-name shimmer-text">Max Combo</span><span class="stat-val" id="playerCombo">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Play Count</span><span class="stat-val" id="playerPlayCount">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Play Time</span><span class="stat-val" id="playerPlayTime">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Ranked Score</span><span class="stat-val" id="playerScore">--</span></div>
+                    <div class="stat-row"><span class="stat-name shimmer-text">Join Date</span><span class="stat-val" id="playerJoinDate">--</span></div>
+                </div>
+
+            </div>
         </div>
 
         <div class="comparison-container hidden" id="comparisonView">
-            <div class="profile-card">
-                </div>
-            <div class="profile-card">
-                </div>
+            <div class="profile-card"><h3 style="text-align:center; color:var(--text-muted);">Player 1 Stats (Coming Soon)</h3></div>
+            <div class="profile-card"><h3 style="text-align:center; color:var(--text-muted);">Player 2 Stats (Coming Soon)</h3></div>
         </div>
-    </main></main>
+
+    </main>
 
     <script>
         // --- UI Mode Toggle Logic ---
@@ -57,61 +106,48 @@
         const singleView = document.getElementById('singleProfileView');
         const compareView = document.getElementById('comparisonView');
 
-        // When "Single Player" is clicked
         btnSingle.addEventListener('click', () => {
-            // Light up the correct button
             btnSingle.classList.add('active');
             btnCompare.classList.remove('active');
             
-            // Show Single UI, Hide Compare UI
             singleSearchBox.classList.remove('hidden');
             singleView.classList.remove('hidden');
             dualSearchBox.classList.add('hidden');
             compareView.classList.add('hidden');
         });
 
-        // When "Compare" is clicked
         btnCompare.addEventListener('click', () => {
-            // Light up the correct button
             btnCompare.classList.add('active');
             btnSingle.classList.remove('active');
             
-            // Show Compare UI, Hide Single UI
             dualSearchBox.classList.remove('hidden');
             compareView.classList.remove('hidden');
             singleSearchBox.classList.add('hidden');
             singleView.classList.add('hidden');
         });
-        // *** PUT YOUR WORKER URL HERE ***
-        const WORKER_URL = "https://osu-tracker-api.eliamelliger.workers.dev";
 
+        // *** API & Fetch Logic ***
+        const WORKER_URL = "https://osu-tracker-api.eliamelliger.workers.dev";
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
 
-        // --- NEW: Smooth Number Counter Function ---
         function animateValue(element, start, end, duration, isFloat = false, prefix = '', suffix = '') {
             let startTimestamp = null;
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
-                // Calculate how far along the animation is (from 0 to 1)
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                
-                // "Ease Out" math: makes the counter slow down smoothly as it reaches the end
                 const easeProgress = 1 - Math.pow(1 - progress, 3);
                 const currentVal = start + easeProgress * (end - start);
 
-                // Format the number properly while it counts
                 if (isFloat) {
                     element.innerText = prefix + currentVal.toFixed(2) + suffix;
                 } else {
                     element.innerText = prefix + Math.floor(currentVal).toLocaleString() + suffix;
                 }
 
-                // If not finished, keep animating
                 if (progress < 1) {
                     window.requestAnimationFrame(step);
                 } else {
-                    // Force the exact final number at the end just to be safe
                     element.innerText = prefix + (isFloat ? end.toFixed(2) : end.toLocaleString()) + suffix;
                 }
             };
@@ -130,10 +166,7 @@
                     searchBtn.innerText = "Search";
                     return;
                 }
-
-               // --- 1. Top Banner Section ---
                 
-                // Set the Background Cover Image
                 const headerBg = document.getElementById('headerBg');
                 if (data.cover_url) {
                     headerBg.style.backgroundImage = `url('${data.cover_url}')`;
@@ -141,11 +174,9 @@
                     headerBg.style.backgroundImage = 'none';
                 }
 
-                // Avatar and Name
                 document.getElementById('playerName').innerText = data.username;
                 document.getElementById('playerAvatar').style.backgroundImage = `url('${data.avatar_url}')`;
                 
-                // Online Status
                 const onlineTag = document.getElementById('onlineTag');
                 if (data.is_online) {
                     onlineTag.classList.remove('hidden');
@@ -153,7 +184,6 @@
                     onlineTag.classList.add('hidden');
                 }
 
-                // Supporter Status
                 const supporterTag = document.getElementById('supporterTag');
                 if (data.is_supporter) {
                     supporterTag.classList.remove('hidden');
@@ -161,10 +191,8 @@
                     supporterTag.classList.add('hidden');
                 }
 
-                // Flag
                 document.getElementById('playerFlag').style.backgroundImage = `url('https://flagcdn.com/w80/${data.country_code.toLowerCase()}.png')`;
                 
-                // Playstyle (e.g., "Keyboard, Tablet")
                 const playstyleText = document.getElementById('playstyleText');
                 if (data.playstyle && data.playstyle.length > 0) {
                     playstyleText.innerText = data.playstyle.join(', ');
@@ -172,38 +200,30 @@
                     playstyleText.innerText = '';
                 }
 
-                // XP Bar
                 const levelProgress = data.statistics.level.progress;
                 document.getElementById('xpFill').style.width = `${levelProgress}%`;
                 document.getElementById('xpText').innerText = `Level ${data.statistics.level.current} (${levelProgress}%)`;
 
-                // --- 2. Core Stats (WITH ANIMATION & TOOLTIP) ---
                 const rankRow = document.getElementById('playerRank').parentElement;
                 
-                // Global Rank + Peak Rank Tooltip
                 if (data.statistics.global_rank) {
                     animateValue(document.getElementById('playerRank'), 0, data.statistics.global_rank, 1500, false, '#');
-                    
-                    // Fetch highest rank and attach to the tooltip
                     const peakRank = data.rank_highest ? data.rank_highest.rank.toLocaleString() : "N/A";
                     rankRow.setAttribute('data-tooltip', `Peak Rank: #${peakRank}`);
                 } else {
                     document.getElementById('playerRank').innerText = 'N/A';
-                    rankRow.removeAttribute('data-tooltip'); // Hides tooltip if unranked
+                    rankRow.removeAttribute('data-tooltip');
                 }
 
-                // Country Rank
                 if (data.statistics.country_rank) {
                     animateValue(document.getElementById('playerCountry'), 0, data.statistics.country_rank, 1500, false, '#');
                 } else {
                     document.getElementById('playerCountry').innerText = 'N/A';
                 }
 
-                // Performance Points & Accuracy
                 animateValue(document.getElementById('playerPP'), 0, Math.round(data.statistics.pp), 1500);
-                animateValue(document.getElementById('playerAcc'), 0, data.statistics.hit_accuracy, 1500, true, '', '%');// 'true' means it handles decimals
+                animateValue(document.getElementById('playerAcc'), 0, data.statistics.hit_accuracy, 1500, true, '', '%');
                 
-                // --- 3. Grades (WITH ANIMATION) ---
                 const totalSS = data.statistics.grade_counts.ss + data.statistics.grade_counts.ssh;
                 const totalS = data.statistics.grade_counts.s + data.statistics.grade_counts.sh;
                 
@@ -211,26 +231,21 @@
                 animateValue(document.getElementById('rankS'), 0, totalS, 1500);
                 animateValue(document.getElementById('rankA'), 0, data.statistics.grade_counts.a, 1500);
 
-               // --- 4. Extra Stats (WITH ANIMATION & TOOLTIPS) ---
                 animateValue(document.getElementById('playerCombo'), 0, data.statistics.maximum_combo, 1500, false, '', 'x');
                 animateValue(document.getElementById('playerPlayCount'), 0, data.statistics.play_count, 1500);
                 
-                // Play Time + Days Tooltip
                 const hoursPlayed = Math.round(data.statistics.play_time / 3600);
                 animateValue(document.getElementById('playerPlayTime'), 0, hoursPlayed, 1500, false, '', ' hrs');
                 
-                // Calculate Playtime in Days
                 const daysPlayed = (data.statistics.play_time / 86400).toFixed(1);
                 document.getElementById('playerPlayTime').parentElement.setAttribute('data-tooltip', `Equals ${daysPlayed} full days`);
 
                 animateValue(document.getElementById('playerScore'), 0, data.statistics.ranked_score, 1500);
 
-                // Join Date + Time Since Joined Tooltip
                 const joinDate = new Date(data.join_date);
                 const formattedDate = joinDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
                 document.getElementById('playerJoinDate').innerText = formattedDate;
                 
-                // Calculate years and months since joining
                 const today = new Date();
                 let years = today.getFullYear() - joinDate.getFullYear();
                 let months = today.getMonth() - joinDate.getMonth();
