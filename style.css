@@ -409,3 +409,43 @@ nav a.milky-tab:hover {
         flex-direction: column; /* Stacks the search bars */
     }
 }
+/* --- MODE TOGGLE SWITCH --- */
+.mode-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px; /* Spacing between switch and search bars */
+}
+
+.mode-toggle {
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    padding: 5px;
+}
+
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 8px 24px;
+    border-radius: 25px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* The active state (Glowing Pink) */
+.toggle-btn.active {
+    background: var(--osu-pink);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 102, 170, 0.4);
+}
+
+/* Hover effect for the inactive button */
+.toggle-btn:not(.active):hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
