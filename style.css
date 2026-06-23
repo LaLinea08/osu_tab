@@ -251,18 +251,19 @@ nav a.milky-tab:hover {
 .color-rank { color: #73d0ff; text-shadow: 0 0 10px rgba(115, 208, 255, 0.4); }
 .color-pp { color: var(--osu-pink); text-shadow: 0 0 12px rgba(255, 102, 170, 0.5); }
 /* Grades Colors */
-.color-silver { 
-    color: #e0e0e0; /* Platinum Silver */
-    text-shadow: 0 0 10px rgba(224, 224, 224, 0.6); 
+/* Grades Colors */
+.color-ss { 
+    color: #e0e0e0; /* Silver */
+    text-shadow: 0 0 10px rgba(224, 224, 224, 0.5); 
 }
 
-.color-gold { 
-    color: #ffd966; /* Bright Gold */
-    text-shadow: 0 0 10px rgba(255, 217, 102, 0.6); 
+.color-s { 
+    color: #ffd966; /* Gold */
+    text-shadow: 0 0 10px rgba(255, 217, 102, 0.5); 
 }
 
 .color-a { 
-    color: #a2e043; /* Green */
+    color: #a2e043; /* Bright Green */
     text-shadow: 0 0 10px rgba(162, 224, 67, 0.5); 
 }
 
